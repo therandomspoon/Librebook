@@ -1,10 +1,10 @@
 <?php
 // config.php
 
-$db_host = 'localhost';
-$db_name = 'messages';
-$db_user = 'adamg';
-$db_password = 'pirules';
+$db_host = '';
+$db_name = '';
+$db_user = '';
+$db_password = '';
 
 try {
     $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_password);
