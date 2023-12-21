@@ -1,5 +1,4 @@
 <?php
-// config.php
 
 $db_host = '';
 $db_name = '';
