@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #1877f2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a:active {
+    color: #1877f2;
+}
+
+#trinity {
+    background-color: #1877f2;
+    border: 1px solid #1877f2;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    font-size: 15px;
+    max-width: 250px;
+    margin: 10px auto;
+
+}
+
+#helloworld {
+    max-width: 300px;
+    background-color: white;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#messages {
+    margin: 30px auto;
+    max-width: 600px;
+    background-color: white;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#superbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    background-color: white;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#head {
+    background-color: #1877f2;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 1px solid #dddfe2;
+}
+#headl{
+    margin-left: 15px;
+}
+
+#message {
+    padding: 12px;
+    max-width: 1000px;
+    max-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    resize: none;
+}
+
+#new_bio {
+    padding: 12px;
+    max-width: 750px; /* Remove the extra comma here */
+    max-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 6px auto 16px auto;
+    resize: none;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+#new_pfp {
+    padding: 12px;
+    max-width: 750px; /* Remove the extra comma here */
+    max-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 6px auto 16px auto;
+    resize: none;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.message .user {
+    font-weight: bold;
+    color: #1877f2;
+}
+
+.message .timestamp {
+    color: #555;
+    font-size: 12px;
+}
+
+.message .content {
+    margin-top: 8px;
+}
+
+#searchbar {
+    text-align: center;
+    padding: 20px;
+}
+
+#searchform {
+    display: inline-block;
+}
+
+#searchbut {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f2f5;
+    color: #333; 
+}
+
+#searchbut::placeholder {
+    color: #aaa;
+}
+
+button {
+    padding: 10px;
+    background-color: #1877f2; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #115293; 
+}
+
+.fa-search {
+    font-size: 18px;
+    color: white; 
+}
