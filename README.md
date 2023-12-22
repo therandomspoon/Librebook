@@ -22,6 +22,7 @@ Privacy matters. So use Librebook
 - reactions
 - Instance hosted by me (soon)
 - Deleting accounts (***very soon***)
+- folder organisation
 
 # Screenshots (genesis ver)
 ## landing page
