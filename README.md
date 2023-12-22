@@ -6,7 +6,7 @@ Librebook the free, secure, not selling your data social media solution made by 
 
 # Features
 - Global messaging system
-- custom profiles
+- custom profiles (pfp, bio, not user as of this time)
 - looking up others profiles
 - secure login system
 - messages only sent by user showsn on profile inspection
@@ -16,3 +16,4 @@ Librebook the free, secure, not selling your data social media solution made by 
 # Upcoming features
 - p2p messaging systen (dm's)
 - reactions
+
