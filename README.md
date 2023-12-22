@@ -6,6 +6,7 @@ Privacy matters. So use Librebook
 # Components required
 - Mysql server
 - Web server
+- PHP
 
 # Features
 - Global messaging system
