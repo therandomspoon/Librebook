@@ -33,6 +33,23 @@ a:active {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+#excempta{
+    background-color: #1877f2;
+    color: white;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.creditbar {
+    width: 100%;
+    background-color: #1877f2;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    padding: 15px;
+}
 
 #messages {
     margin: 30px auto;

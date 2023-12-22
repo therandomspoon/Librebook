@@ -27,4 +27,7 @@
         </section>
         <br></br>
     </section>
+    <div class="creditbar">
+        <a href="masthead.html" id="excempta">Masthead</a>
+    </div>
 </body>
