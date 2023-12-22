@@ -2,7 +2,7 @@
 Librebook the free, secure, not selling your data social media solution made by the solo developer therandomspoon because they were bored.
 
 # A photo of Leo the lion the mascot of Librebook created by Bing AI
-![image](https://github.com/therandomspoon/librebook/assets/107148755/e76d201c-de73-4ec5-9fa7-d611e44cfc8c)
+![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
 
 # Features
 - Global messaging system
