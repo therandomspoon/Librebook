@@ -3,6 +3,14 @@ Librebook the free, secure, not selling your data social media solution made by 
 
 ***Privacy matters. So use Librebook***
 
+## Developers
+- Lead developer: Therandomspoon
+- Bing AI: Contributed a lot of the login code as i have no idea what im doing. Also made the code SQL and HTML injection proof
+## Major Contributors
+Golddominik893 - i intended to steal a lot of code from Golddominik893 for the login system but i got confused cos im a bit stupid.
+Bing AI - Surprisingly good and free image generation. Contributed Leo the lion (mascot of librebook)
+First version (genesis) finished on the 22/12/2023 and released on github.
+
 # Components required
 - Mysql server
 - Web server
@@ -43,3 +51,14 @@ Librebook the free, secure, not selling your data social media solution made by 
 
 # A photo of Leo the lion the mascot of Librebook created by Bing AI
 ![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
+
+
+# Welcome to Librebook !
+Librebook is the free, intended to be private social media made by the solo developer Therandomspoon. Librebook is intended to be open source and to exist for others to expand on and host while enjoying their data not being sold.</p>
+## Developers
+- Lead developer: Therandomspoon
+- Bing AI: Contributed a lot of the login code as i have no idea what im doing. Also made the code SQL and HTML injection proof
+## Major Contributors
+Golddominik893 - i intended to steal a lot of code from Golddominik893 for the login system but i got confused cos im a bit stupid.
+Bing AI - Surprisingly good and free image generation. Contributed Leo the lion (mascot of librebook)
+First version (genesis) finished on the 22/12/2023 and released on github.
