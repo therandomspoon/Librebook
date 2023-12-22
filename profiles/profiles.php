@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
-  <link rel="stylesheet" href="mainsite.css">
+  <link rel="stylesheet" href="/css/mainsite.css">
 </head>
 <style>
   #blading {
@@ -15,13 +15,13 @@
 </style>
 <body>
   <section id="head">
-    <img src="librebook1.png" style="height: 125px; width: 125px; float: right;">
+    <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
     <h1 id="headl">Librebook</h1>
   </section>
   <a href="main.php">Take me back!</a>
   <section id="sendamess">
   <?php
-include 'config.php';
+include '/config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

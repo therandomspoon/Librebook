@@ -100,7 +100,7 @@ a:active {
 
 #new_bio {
     padding: 12px;
-    max-width: 750px; /* Remove the extra comma here */
+    max-width: 750px;
     max-height: 50px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -112,7 +112,7 @@ a:active {
 }
 #new_pfp {
     padding: 12px;
-    max-width: 750px; /* Remove the extra comma here */
+    max-width: 750px;
     max-height: 50px;
     border: 1px solid #ccc;
     border-radius: 4px;
