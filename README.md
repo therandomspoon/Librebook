@@ -16,6 +16,7 @@ Librebook the free, secure, not selling your data social media solution made by 
 - messages only sent by user shows on profile inspection
 - protection against sql and html injection
 - photo posts 422 × 296 px
+- folders for the files organisation cos Golddominik893 asked
 
 # Upcoming features
 - p2p messaging systen (dm's)
