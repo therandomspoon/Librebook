@@ -3,8 +3,9 @@ Librebook the free, secure, not selling your data social media solution made by 
 
 Privacy matters. So use Librebook
 
-# A photo of Leo the lion the mascot of Librebook created by Bing AI
-![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
+# Components required
+- Mysql server
+- Web server
 
 # Features
 - Global messaging system
@@ -19,6 +20,7 @@ Privacy matters. So use Librebook
 - p2p messaging systen (dm's)
 - reactions
 - Instance hosted by me (soon)
+- Deleting accounts (***very soon***)
 
 # Screenshots (genesis ver)
 ## landing page
@@ -36,3 +38,5 @@ Privacy matters. So use Librebook
 (even shows the messages that only they sent!)
 ![image](https://github.com/therandomspoon/librebook/assets/107148755/2bb4005d-b166-44d6-bb1f-4e9cd9558dc1)
 
+# A photo of Leo the lion the mascot of Librebook created by Bing AI
+![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
