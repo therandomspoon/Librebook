@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id'])) {
                 var message_text = $("#message").val();
                 $.ajax({
                     type: "POST",
-                    url: "/librebook/submit.php",
+                    url: "/submit.php",
                     data: { name: name, message_text: message_text },
                     success: function(response) {
                         $("#name").val("");
@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
             setInterval(function() {
                 $.ajax({
                     type: "GET",
-                    url: "/librebook/messages.php",
+                    url: "messages.php",
                     success: function(response) {
                         $("#messageList").html(response);
                     },
