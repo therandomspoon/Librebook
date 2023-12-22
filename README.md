@@ -1,5 +1,5 @@
 # Librebook
-Librebook the free, secure, not selling your data social media solution made by the solo developer therandomspoon because they were bored.
+Librebook the free, secure, not selling your data social media solution made by the therandomspoon because they were bored.
 
 Privacy matters. So use Librebook
 
