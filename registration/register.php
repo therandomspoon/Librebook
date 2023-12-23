@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $newUser = [
                 'username' => $username,
-                'pfp' => 'empty.webp',
+                'pfp' => '/images/empty.webp',
                 'bio' => '' 
             ];
 
