@@ -3,8 +3,18 @@ include '/config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+function containsEmoji($string) {
+    $string = preg_replace('/[^\w\s.,!?]/', '', $string);
+    return preg_match('/[^\x00-\x7F]/', $string);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
+    if (containsEmoji($username)) {
+        echo 'Error: Usernames cannot contain emojis.';
+        exit();
+    }
+
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
@@ -12,10 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-
         $stmt = $pdo->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
         $stmt->execute([$username, $password]);
-
 
         $jsonFile = '/user-profiles.json';
 

@@ -4,6 +4,7 @@ $db_host = '';
 $db_name = '';
 $db_user = '';
 $db_password = '';
+$sacredwork = ''; #for a future unreleased update regarding verifying accounts 
 
 try {
     $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_password);
