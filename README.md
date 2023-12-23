@@ -34,7 +34,7 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - reactions
 - Instance hosted by me (soon)
 - Deleting accounts (***very soon***)
-- folder organisation (soon but not as soon as deleting accounts but still more soon than my hosted ver)
+- global access sql server for messages (soon but not as soon as deleting accounts but still more soon than my hosted ver)
 
 # Screenshots (genesis ver)
 ## landing page
