@@ -8,29 +8,8 @@
         },
         {
             "username": "therandomspoon",
-            "pfp": "spoon.png",
+            "pfp": "/spoon.png",
             "bio": "Creator and Lead Developer of Librebook and a pretty stupid guy.\r\nUnsplash:https:\/\/unsplash.com\/@therandomspoon\r\nGithub:https:\/\/github.com\/therandomspoon\/",
             "email": "admin@randspoon.co.uk"
-        },
-        {
-            "username": "superguy",
-            "pfp": "",
-            "bio": ""
-        },
-        {
-            "username": "new",
-            "pfp": "empty.webp",
-            "bio": ""
-        },
-        {
-            "username": "avocado",
-            "pfp": "https:\/\/imgs.search.brave.com\/dgvIYpV2Y78FiQSnEqf9S6MdauKveB2CYjKKPNczwEk\/rs:fit:860:0:0\/g:ce\/aHR0cHM6Ly9pLmlt\/Z3VyLmNvbS9MWHlk\/VVJkYi5qcGc",
-            "bio": "i am an avocado"
-        },
-        {
-            "username": "therandomspoon",
-            "pfp": "empty.webp",
-            "bio": ""
         }
-    ]
 }
