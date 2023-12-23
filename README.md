@@ -5,9 +5,11 @@ Librebook the free, secure, not selling your data social media solution made by 
 
 ## Developers
 - Lead developer: Therandomspoon
+
 - Bing AI: Contributed a lot of the login code as i have no idea what im doing. Also made the code SQL and HTML injection proof
 ## Major Contributors
 Golddominik893 - i intended to steal a lot of code from Golddominik893 for the login system but i got confused cos im a bit stupid.
+
 Bing AI - Surprisingly good and free image generation. Contributed Leo the lion (mascot of librebook)
 First version (genesis) finished on the 22/12/2023 and released on github.
 
