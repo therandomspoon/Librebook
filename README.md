@@ -56,6 +56,10 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 ![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
 
 
+# Librebook is coconutified!
+![image](https://github.com/therandomspoon/librebook/assets/107148755/a0875eba-ec0f-4446-a4a2-a227b5e39d61)
+
+
 # Welcome to Librebook !
 Librebook is the free, intended to be private social media made by the solo developer Therandomspoon. Librebook is intended to be open source and to exist for others to expand on and host while enjoying their data not being sold.</p>
 ## Developers
