@@ -28,7 +28,6 @@
             <a href="../registration/register.html">register</p>
             <p></p>
             <a href="../login/login.html">login</p>
-            <img src="https://stbonifacevets.co.uk/sites/stbonifacevets.co.uk/files/userfiles/website-construction-graphic-4.jpg">
         </section>
         <br></br>
     </section>
