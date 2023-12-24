@@ -28,11 +28,11 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - protection against sql and html injection
 - photo posts 422 × 296 px
 - folders for the files organisation cos Golddominik893 asked
+- - Instance hosted by me (http://librebook.rf.gd/)
 
 # Upcoming features
 - p2p messaging systen (dm's)
 - reactions
-- Instance hosted by me (soon)
 - Deleting accounts (***very soon***)
 - global access sql server for messages (soon but not as soon as deleting accounts but still more soon than my hosted ver)
 
