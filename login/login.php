@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include '/config.php';
+include '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -20,10 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $user['username'];
 
         echo 'Login successful! Welcome, ' . htmlspecialchars($user['username']) . '!';
-        header('Location: /main.php');
+        header('Location: ../main.php');
         exit();
     } else {
-        header('Location: /errors/errorlog.html');
+        header('Location: ../errors/errorlog.html');
         exit();
     }
 }

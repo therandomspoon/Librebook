@@ -6,7 +6,7 @@ if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
     $username = $_SESSION['username'];
 } else {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
 ?>
@@ -31,10 +31,10 @@ if (isset($_SESSION['user_id'])) {
         echo 'Welcome back ' . htmlspecialchars($username) . '!';
         ?>
         <p></p>
-        <a href="/logout.php">Logout</a><a href="/profiles/sprofile.php" style="float: right;">See my profile</a>
+        <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
     </div>
     <section id="searchbar">
-            <form action="/profiles/profiles.php" id="searchform" method="post">
+            <form action="../profiles/profiles.php" id="searchform" method="post">
                 <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
                 <button type="submit">Search!<i class="fa fa-search"></i></button>
             </form>
@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id'])) {
                 var message_text = $("#message").val();
                 $.ajax({
                     type: "POST",
-                    url: "/messages/submit.php",
+                    url: "../messages/submit.php",
                     data: { name: name, message_text: message_text },
                     success: function(response) {
                         $("#name").val("");
@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
             setInterval(function() {
                 $.ajax({
                     type: "GET",
-                    url: "/messages/messages.php",
+                    url: "../messages/messages.php",
                     success: function(response) {
                         $("#messageList").html(response);
                     },

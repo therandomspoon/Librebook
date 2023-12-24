@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
     $username = $_SESSION['username'];
-    $jsonFile = 'user-profiles.json';
+    $jsonFile = '../user-profiles.json';
 
     if (file_exists($jsonFile)) {
         $jsonData = file_get_contents($jsonFile);
@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
         echo '<p>Error: User profiles file not found</p>';
     }
 } else {
-    header('Location: login.html');
+    header('Location: ../login.html');
     exit();
 }
 
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="mainsite.css">
+    <link rel="stylesheet" href="../css/mainsite.css">
 </head>
 <style>
     img {
@@ -69,10 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </style>
 <body>
     <section id="head">
-        <img src="librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
-    <a href="main.php">Take me back!</a>
+    <a href="../main.php">Take me back!</a>
     <section id="sendamess">
         <section id="messages">
             <h1>My Profile</h1>

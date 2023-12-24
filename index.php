@@ -4,30 +4,35 @@
     #sendamess, #messages {
         font-size: 20px;
     }
+    img {
+        width: 600px;
+        height: 500px;
+    }
 </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>librebook</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="/css/mainsite.css">
+    <link rel="stylesheet" href="../css/mainsite.css">
 </head>
 <body>
     <section id="head">
-        <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
     <section id="sendamess">
         <section id="messages">
             <h1>Welcome to Librebook !</h1>
             <p>For security and functionality reasons you must login or register to use our site (sorry) but do not fret we dont collect data apart from your username and password so you can login and message!</p>
-            <a href="/registration/register.html">register</p>
+            <a href="../registration/register.html">register</p>
             <p></p>
-            <a href="/login/login.html">login</p>
+            <a href="../login/login.html">login</p>
+            <img src="https://stbonifacevets.co.uk/sites/stbonifacevets.co.uk/files/userfiles/website-construction-graphic-4.jpg">
         </section>
         <br></br>
     </section>
     <div class="creditbar">
-        <a href="masthead.html" id="excempta">Masthead</a>
+        <a href="../masthead.html" id="excempta">Masthead</a>
     </div>
 </body>
