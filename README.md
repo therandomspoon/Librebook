@@ -28,11 +28,11 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - protection against sql and html injection
 - photo posts 422 × 296 px
 - folders for the files organisation cos Golddominik893 asked
+- - Instance hosted by me (http://librebook.rf.gd/)
 
 # Upcoming features
 - p2p messaging systen (dm's)
 - reactions
-- Instance hosted by me (soon)
 - Deleting accounts (***very soon***)
 - global access sql server for messages (soon but not as soon as deleting accounts but still more soon than my hosted ver)
 
@@ -54,6 +54,10 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 
 # A photo of Leo the lion the mascot of Librebook created by Bing AI
 ![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
+
+
+# Librebook is coconutified!
+![image](https://github.com/therandomspoon/librebook/assets/107148755/a0875eba-ec0f-4446-a4a2-a227b5e39d61)
 
 
 # Welcome to Librebook !
