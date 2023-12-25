@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: main.php');
+    exit();
+} else {
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <style>
