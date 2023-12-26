@@ -35,6 +35,7 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - p2p messaging systen (dm's) (***very soon***)
 - reactions 
 - global access sql server for messages (soon but not as soon as deleting accounts but still more soon than my hosted ver)
+- friending system
 
 # Screenshots (genesis ver)
 ## landing page
