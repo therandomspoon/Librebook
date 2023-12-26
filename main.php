@@ -31,6 +31,8 @@ if (isset($_SESSION['user_id'])) {
         echo 'Welcome back ' . htmlspecialchars($username) . '!';
         ?>
         <p></p>
+        <a href="deleteyou.php">Delete your account</a>
+        <p></p>
         <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
     </div>
     <section id="searchbar">
