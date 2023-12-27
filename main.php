@@ -10,6 +10,16 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 ?>
+<?php
+$hitCounterFile = 'mainhitcounter.txt';
+if (!file_exists($hitCounterFile)) {
+    file_put_contents($hitCounterFile, '0');
+}
+$hitCount = (int)file_get_contents($hitCounterFile);
+$hitCount++;
+file_put_contents($hitCounterFile, $hitCount);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
