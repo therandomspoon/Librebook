@@ -1,97 +1,103 @@
-<?php
-session_start();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="../css/mainsite.css">
+</head>
+<style>
+  #blading {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+</style>
+<body>
+  <section id="head">
+    <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+    <h1 id="headl">Librebook</h1>
+  </section>
+  <a href="../main.php">Take me back!</a>
+  <section id="sendamess">
+  <?php
+include '../config.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-    $username = $_SESSION['username'];
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
     $jsonFile = '../user-profiles.json';
 
     if (file_exists($jsonFile)) {
         $jsonData = file_get_contents($jsonFile);
         $userProfiles = json_decode($jsonData, true);
-
+        
         if ($userProfiles === null && json_last_error() !== JSON_ERROR_NONE) {
             echo '<p>Error decoding JSON: ' . json_last_error_msg() . '</p>';
         } else {
             $foundProfile = null;
 
             foreach ($userProfiles['users'] as $profile) {
-                if ($profile['username'] === $username) {
+                if ($profile['username'] === $searchTerm) {
                     $foundProfile = $profile;
                     break;
                 }
             }
 
-            if (!$foundProfile) {
-                echo '<p>User profile not found</p>';
+            if ($foundProfile) {
+                echo '<section id="messages">';
+                echo '<h1>Search result</h1>';
+                echo '<img src="' . $foundProfile['pfp'] . '" alt="Profile Picture" id="blading">';
+                echo '<h1>Username: ' . $foundProfile['username'] . '</h1>';
+                echo '<p>Bio: ' . $foundProfile['bio'] . '</p>';
+                echo '</section>';
+
+                echo '<section id="messages">';
+
+                try {
+                    $escapedUsername = $foundProfile['username'];
+                    $sql = "SELECT `name`, `message`, `timestamp`
+                            FROM messages
+                            WHERE `name` = :username
+                            ORDER BY `timestamp` DESC";
+
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':username', $escapedUsername, PDO::PARAM_STR);
+                    $stmt->execute();
+
+                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($rows) {
+                        foreach ($rows as $row) {
+                            $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
+                            $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
+                            $timestamp = $row["timestamp"];
+
+                            if (filter_var($message, FILTER_VALIDATE_URL) && (strpos($message, '.jpg') !== false || strpos($message, '.jpeg') !== false || strpos($message, '.png') !== false)) {
+                                echo "<div><b>" . $name . ":</b> <br> <img src='" . $message . "' alt='Image' style='width: 211px; height: 148px;'> <br> (Sent on: " . $timestamp . ")</div>";
+                            } else {
+                                echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
+                            }
+                        }
+                    } else {
+                        echo "No messages.";
+                    }
+                } catch (PDOException $e) {
+                    echo "Error executing query: " . $e->getMessage();
+                }
+
+                echo '</section>';
+            } else {
+                echo '<p>User not found</p>';
             }
         }
     } else {
         echo '<p>Error: User profiles file not found</p>';
     }
-} else {
-    header('Location: ../login.html');
-    exit();
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $newPfp = isset($_POST['new_pfp']) ? $_POST['new_pfp'] : $foundProfile['pfp'];
-    $newBio = isset($_POST['new_bio']) ? htmlspecialchars($_POST['new_bio']) : $foundProfile['bio'];
-    
-    foreach ($userProfiles['users'] as &$profile) {
-        if ($profile['username'] === $username) {
-            $profile['pfp'] = $newPfp;
-            $profile['bio'] = $newBio;
-            break;
-        }
-    }
-    
-    file_put_contents($jsonFile, json_encode($userProfiles, JSON_PRETTY_PRINT));
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit();
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="../css/mainsite.css">
-</head>
-<style>
-    img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-    }
-</style>
-<body>
-    <section id="head">
-        <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
-        <h1 id="headl">Librebook</h1>
-    </section>
-    <a href="../main.php">Take me back!</a>
-    <section id="sendamess">
-        <section id="messages">
-            <h1>My Profile</h1>
-            <img src="<?php echo $foundProfile['pfp']; ?>" alt="Profile Picture">
-            <h1>Username: <?php echo $foundProfile['username']; ?></h1>
-            <p>Bio: <?php echo $foundProfile['bio']; ?></p>
-            <h2>Edit Profile</h2>
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <label for="new_pfp">New Profile Picture URL:</label><br>
-                <input type="text" name="new_pfp" id="new_pfp" placeholder="Enter new profile picture URL" value="<?php echo $foundProfile['pfp']; ?>">
-                <br>
-                <label for="new_bio">New Bio:</label>
-                <br>
-                <textarea name="new_bio" id="new_bio" placeholder="Enter new bio" rows="4" cols="50"><?php echo $foundProfile['bio']; ?></textarea>
-                <br>
-                <button type="submit">Update Profile</button>
-            </form>
-        </section>
-        <br></br>
-    </section>
+  </section>
 </body>
 </html>

@@ -36,11 +36,12 @@ if (isset($_SESSION['user_id'])) {
         <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
     </div>
     <section id="searchbar">
-            <form action="../profiles/profiles.php" id="searchform" method="post">
-                <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
-                <button type="submit">Search!<i class="fa fa-search"></i></button>
-            </form>
+        <form action="../profiles/profiles.php" id="searchform" method="get">
+            <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
+            <button type="submit">Search!<i class="fa fa-search"></i></button>
+        </form>
     </section>
+
         <section id="messages">
             <div id="success"></div>
             <div id="error"></div>
@@ -55,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
     </section>
     <script>
         var userID = "<?php echo $username; ?>";
-        console.log(userID)
+        console.log('hi',userID)
         $(document).ready(function() {
             $("#messageForm").submit(function(event) {
                 event.preventDefault();
