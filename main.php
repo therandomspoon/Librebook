@@ -101,5 +101,6 @@ file_put_contents($hitCounterFile, $hitCount);
             }, 1000);
         });
     </script>
+<script src="script.js"></script>
 </body>
 </html>

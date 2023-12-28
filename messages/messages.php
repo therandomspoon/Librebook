@@ -1,9 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
 include '../config.php'; 
-
 try {
     $conn = $pdo->query("SELECT `name`, `message`, `timestamp`
                         FROM messages
