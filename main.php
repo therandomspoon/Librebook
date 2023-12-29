@@ -27,7 +27,7 @@ file_put_contents($hitCounterFile, $hitCount);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>librebook</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="/css/mainsite.css">
+    <link rel="stylesheet" href="../css/mainsite.css">
 </head>
 <body>
 

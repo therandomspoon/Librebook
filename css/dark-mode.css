@@ -1,15 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #1a1a1a;
     margin: 0;
     padding: 0;
+    color: white;
 }
-
-::selection {
-    background-color: #1877f2; 
-    color: white; 
-}
-
 a {
     color: #1877f2;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,8 +27,8 @@ a:active {
 
 #helloworld {
     max-width: 300px;
-    background-color: white;
-    border: 1px solid #dddfe2;
+    background-color: #1a1a1a;
+    border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -60,21 +55,20 @@ a:active {
 #messages {
     margin: 30px auto;
     max-width: 600px;
-    background-color: white;
-    border: 1px solid #dddfe2;
+    background-color: #1a1a1a;
+    border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 #superbar {
     position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
-    background-color: white;
-    border: 1px solid #dddfe2;
+    background-color: #1a1a1a;
+    border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -87,7 +81,7 @@ a:active {
     font-size: 24px;
     padding: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-bottom: 1px solid #dddfe2;
+    border-bottom: 1px solid #272727;
 }
 #headl{
     margin-left: 15px;
@@ -95,23 +89,22 @@ a:active {
 
 #message {
     padding: 12px;
+    max-width: 1000px;
     max-height: 50px;
-    border: 1px solid #ccc;
+    border: 1px solid #272727;
     border-radius: 4px;
+    box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
     resize: none;
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-
+    background-color: #272727;
 }
 
 #new_bio {
     padding: 12px;
     max-width: 750px;
     max-height: 50px;
-    border: 1px solid #ccc;
+    border: 1px solid #272727;
     border-radius: 4px;
     box-sizing: border-box;
     margin: 6px auto 16px auto;
@@ -123,7 +116,7 @@ a:active {
     padding: 12px;
     max-width: 750px;
     max-height: 50px;
-    border: 1px solid #ccc;
+    border: 1px solid #272727;
     border-radius: 4px;
     box-sizing: border-box;
     margin: 6px auto 16px auto;
@@ -137,7 +130,7 @@ a:active {
 }
 
 .message .timestamp {
-    color: #555;
+    color: white;
     font-size: 12px;
 }
 
@@ -157,10 +150,10 @@ a:active {
 #searchbut {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #272727;
     border-radius: 5px;
-    background-color: #f0f2f5;
-    color: #333; 
+    background-color: #1a1a1a;
+    color: white; 
 }
 
 #searchbut::placeholder {
