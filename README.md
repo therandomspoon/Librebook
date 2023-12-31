@@ -18,6 +18,9 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - Mysql server
 - Web server
 - PHP
+- 
+> [!NOTE]
+> Please note that some features from the version we host will not be on the github immediately as it is a pre-alpha build
 
 # Features
 - Global messaging system
