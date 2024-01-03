@@ -20,6 +20,7 @@ try {
                     echo "<div><b>" . $name . ":</b> <br> <img src='" . $message . "' alt='Image' style='width: 211px; height: 148px;'> <br> (Sent on: " . $timestamp . ")</div>";
                 } else {
                     echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
+                    echo "<hr>";
                 }
             }
         } else {
