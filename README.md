@@ -42,27 +42,27 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 
 # Screenshots (genesis ver)
 ## landing page
-![image](https://github.com/therandomspoon/librebook/assets/107148755/1435c08d-c005-4d60-9841-a5d7b7e78a37)
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/indexpage.png)
 
 ## messaging page
 (yours will not have these specific images because they are all on my sql server)
-![image](https://github.com/therandomspoon/librebook/assets/107148755/16f9243c-dcd2-43c1-b44e-8e25187341f9)
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/mainpageexample.png)
 
 ## editing profiles
 (this is my one not everyones)
-![image](https://github.com/therandomspoon/librebook/assets/107148755/c7b8a187-e5f9-4551-8ead-10fdfb6b2c6a)
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/customprofilesexample.png)
 
 ## viewing others profiles
 (even shows the messages that only they sent!)
-![image](https://github.com/therandomspoon/librebook/assets/107148755/2bb4005d-b166-44d6-bb1f-4e9cd9558dc1)
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/searchingupothersprofiles.png)
 
 # A photo of Leo the lion the mascot of Librebook created by Bing AI
-![image](https://github.com/therandomspoon/librebook/assets/107148755/c567fff8-e94e-4654-b4e4-fd920a9aa745)
-
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/leo.png)
 
 # Librebook is coconutified!
-![image](https://github.com/therandomspoon/librebook/assets/107148755/a0875eba-ec0f-4446-a4a2-a227b5e39d61)
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/coconutted.png)
 
+<hr>
 
 # Welcome to Librebook !
 Librebook is the free, intended to be private social media made by the solo developer Therandomspoon. Librebook is intended to be open source and to exist for others to expand on and host while enjoying their data not being sold.</p>
