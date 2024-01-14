@@ -26,6 +26,13 @@ file_put_contents($hitCounterFile, $hitCount);
     <title>librebook</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../css/mainsite.css">
+    <meta property="og:title" content="Librebook">
+    <meta property="og:description" content="Librebook is the free, secure, not selling your data social media solution made by the therandomspoon.">
+    <meta property="og:image" content="http://librebook.rf.gd/images/librebookb.png">
+    <meta property="og:url" content="http://librebook.rf.gd/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@thatrandomspoon">
 </head>
 <body>
 
