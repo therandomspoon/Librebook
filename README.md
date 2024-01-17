@@ -1,7 +1,10 @@
+
 # Librebook
 Librebook the free, secure, not selling your data social media solution made by the therandomspoon because they were bored.
 
 ***Privacy matters. So use Librebook***
+
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/bannerbook.png)
 
 ## Developers
 - Lead developer: Therandomspoon
