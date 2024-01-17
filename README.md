@@ -9,8 +9,6 @@ Librebook the free, secure, not selling your data social media solution made by 
 [![Commits](https://img.shields.io/github/commit-activity/y/therandomspoon/librebook?color=red&label=commits)](https://github.com/therandomspoon/librebook/commits)
 [![Issues](https://img.shields.io/github/issues/therandomspoon/librebook?color=important)](https://github.com/therandomspoon/librebook/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/therandomspoon/librebook?color=blueviolet)](https://github.com/therandomspoon/librebook/pulls)
-[![Build amd64 image](https://github.com/therandomspoon/librebook/actions/workflows/build-amd64.yml/badge.svg)](https://github.com/therandomspoon/librebook/actions/workflows/build-amd64.yml)
-[![Build arm64 image](https://github.com/therandomspoon/librebook/actions/workflows/build-arm64.yml/badge.svg)](https://github.com/therandomspoon/librebook/actions/workflows/build-arm64.yml)
 
 ![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/bannerbook.png)
 
