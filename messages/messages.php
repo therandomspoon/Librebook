@@ -1,7 +1,13 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-include '../config.php'; 
+include '../config.php';
+
+function extractVideoId($url) {
+    $parsedUrl = parse_url($url);
+    parse_str($parsedUrl['query'], $query);
+    return isset($query['v']) ? $query['v'] : null;
+}
 
 try {
     $conn = $pdo->query("SELECT `name`, `message`, `timestamp`
@@ -22,8 +28,22 @@ try {
                      strpos($message, '.jpeg') !== false || 
                      strpos($message, '.png') !== false || 
                      strpos($message, '.webp') !== false)) {
-                    echo "<div><b>" . $name . ":</b> <br> <img src='" . $message . "' alt='Image' style='width: 211px; height: 148px;'> <br> (Sent on: " . $timestamp . ")</div>";
+                    echo "<div><b>" . $name . ":</b> <br> <img src='" . $message . "' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: " . $timestamp . ")</div>";
                     echo "<hr>";
+                } elseif (strpos($message, 'https://ltbeta.epicsite.xyz/watch/?v=') !== false) {
+                    $videoId = extractVideoId($message);
+                    if ($videoId) {
+                        $videoUrl = "https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=" . $videoId . "&dl=dl&itag=18";
+                        echo "<div><b>" . $name . ":</b> <br> <video controls><source src='" . $videoUrl . "' type='video/mp4'></video> <br> (Sent on: " . $timestamp . ")</div>";
+                        echo "<hr>";
+                    }
+                } elseif (strpos($message, 'https://lt.epicsite.xyz/watch/?v=') !== false) {
+                    $videoId = extractVideoId($message);
+                    if ($videoId) {
+                        $videoUrl = "https://lt.epicsite.xyz/videodata/non-hls.php?id=" . $videoId . "&dl=dl&itag=18";
+                        echo "<div><b>" . $name . ":</b> <br> <video controls><source src='" . $videoUrl . "' type='video/mp4'></video> <br> (Sent on: " . $timestamp . ")</div>";
+                        echo "<hr>";
+                    }
                 } else {
                     echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
                     echo "<hr>";
@@ -38,4 +58,6 @@ try {
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }
+# style='width: 211px; height: 148px;
 ?>
+
