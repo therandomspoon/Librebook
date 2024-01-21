@@ -1,7 +1,16 @@
+
 # Librebook
 Librebook the free, secure, not selling your data social media solution made by the therandomspoon because they were bored.
 
 ***Privacy matters. So use Librebook***
+
+[![License](https://img.shields.io/github/license/therandomspoon/librebook?label=License&color=brightgreen&cacheSeconds=3600)](./LICENSE)
+[![Release](https://img.shields.io/github/v/release/therandomspoon/librebook?label=Release&color=brightgreen&cacheSeconds=3600)](https://github.com/therandomspoon/librebook/releases/latest)
+[![Commits](https://img.shields.io/github/commit-activity/y/therandomspoon/librebook?color=red&label=commits)](https://github.com/therandomspoon/librebook/commits)
+[![Issues](https://img.shields.io/github/issues/therandomspoon/librebook?color=important)](https://github.com/therandomspoon/librebook/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/therandomspoon/librebook?color=blueviolet)](https://github.com/therandomspoon/librebook/pulls)
+
+![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/bannerbook.png)
 
 ## Developers
 - Lead developer: Therandomspoon
