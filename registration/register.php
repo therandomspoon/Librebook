@@ -1,5 +1,5 @@
 <?php
-include '../config.php';
+include 'config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -8,22 +8,35 @@ function containsEmoji($string) {
     return preg_match('/[^\x00-\x7F]/', $string);
 }
 
+function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+    // set default
+    $defaultMode = 'light';
+
     if (containsEmoji($username)) {
         echo 'Error: Usernames cannot contain emojis.';
         exit();
     }
 
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    if (!isValidEmail($email)) {
+        echo 'Error: Invalid email address.';
+        exit();
+    }
 
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
-    $stmt->execute([$username]);
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ? OR email = ?');
+    $stmt->execute([$username, $email]);
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-        $stmt = $pdo->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
-        $stmt->execute([$username, $password]);
+        $stmt = $pdo->prepare('INSERT INTO users (username, email, password, preferred_mode) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$username, $email, $password, $defaultMode]);
 
         $jsonFile = '../user-profiles.json';
 
@@ -33,8 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $newUser = [
                 'username' => $username,
+                'email' => $email,
                 'pfp' => '../images/empty.webp',
-                'bio' => '' 
+                'bio' => '',
+                'preferred_mode' => $defaultMode
             ];
 
             $userProfiles['users'][] = $newUser;
@@ -47,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Error: User profiles file not found';
         }
     } else {
-        header('Location: ../erros/erroreg.html');
+        echo 'Error: Username or email already exists.';
     }
 }
 ?>

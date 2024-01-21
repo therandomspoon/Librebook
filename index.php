@@ -56,20 +56,12 @@ if (isset($_SESSION['user_id'])) {
             <h1>What is Librebook ?</h1>
             <hr>
             <video controls>
-                <source src="https://lt.epicsite.xyz/watch/?v=L0E6S--2Zt4" type='video/mp4'>
+                <source src="https://lt.epicsite.xyz/videodata/non-hls.php?id=L0E6S--2Zt4&dl=dl&itag=18" type='video/mp4'>
             </video>
         </section>
         <br></br> 
     </section>
     <br><br>
-    <section id="sendamess">
-        <section id="messages">
-            <h1>Librebook news !</h1>
-            <hr>
-            <h1>Post 1: Librebook X Liberatube collab!</h1>
-            <p>On the 15th of January 2024 Librebook offered to collaborate with Liberatube by allowing Liberatube videos to be sent on Librebook and the video would load. This update was deployed on the pre-alpha release of Librebook and is active to this date. It will soon be published to the github for everyone to incorporate in their versions! This is the first update to Librebook allowing for videos to be sent via Librebook and is a major milestone on the Librebook roadmap. Happy messaging!</p>
-        </section>
-    </section>
     <div class="creditbar">
         <a href="../masthead.html" id="excempta">Masthead</a>
     </div>

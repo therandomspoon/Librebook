@@ -17,13 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
-
+<?php
+include 'cmode.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/mainsite.css">
     <title>Delete Account</title>
 </head>
 <body>
@@ -33,12 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
     <section id="sendamess">
         <section id="messages">
-            <h1>Sorry to see you go!</h1>
+            <h1>Sorry to see you go <?php echo  $_SESSION['username'];?>!</h1>
             <h2>Delete Your Account</h2>
             <p>Are you sure you want to delete your account? It will be unrecoverable!</p>
             <form method="post" action="">
                 <input type="submit" value="Delete Account">
             </form>
+            <hr>
+            <a href="main.php">No take me back!</a>
         </section>
         <br></br>
     </section>

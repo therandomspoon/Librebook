@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
+    background-color: #131b27;
     margin: 0;
     padding: 0;
     color: white;
@@ -37,7 +37,7 @@ a:active {
 
 #helloworld {
     max-width: 300px;
-    background-color: #1a1a1a;
+    background-color: #212836;
     border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
@@ -65,7 +65,7 @@ a:active {
 #messages {
     margin: 30px auto;
     max-width: 600px;
-    background-color: #1a1a1a;
+    background-color: #212836;
     border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
@@ -78,7 +78,7 @@ a:active {
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
-    background-color: #1a1a1a;
+    background-color: #212836;
     border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
@@ -168,7 +168,7 @@ a:active {
     font-size: 16px;
     border: 1px solid #272727;
     border-radius: 5px;
-    background-color: #1a1a1a;
+    background-color: #212836;
     color: white; 
 }
 

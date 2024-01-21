@@ -1,0 +1,77 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+} else {
+    header('Location: ../index.php');
+    exit();
+}
+?>
+<?php
+// so for some stupid reason the code always breaks unless its in its own 'container' of sorts dont know why and probably wont fix - therandomspoon
+include '../cmode.php'
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>librebook</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <section id="head">
+        <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <h1 id="headl">Librebook</h1>
+    </section>
+    <br>
+    <div id="helloworld">
+        <?php
+        echo 'Welcome back ' . htmlspecialchars($username) . '!';
+        ?>
+        <p></p>
+        <a href="../deleteyou.php">Delete your account</a><a href="../settings.php" style="float: right;">Go to Settings</a>
+        <p></p>
+        <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
+        <p></p>
+        <a href="../main.php">Take me back!</a>
+    </div>
+</body>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include '../config.php';
+try {
+    $hashtag = isset($_GET['tag']) ? $_GET['tag'] : '';
+
+    echo "<h1 style='text-align: center;'>Librebook hashtag: #$hashtag</h1>";
+
+    $query = "SELECT `name`, `message`, `timestamp`
+              FROM messages
+              WHERE `message` LIKE :hashtag
+              ORDER BY `timestamp` DESC";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(':hashtag', "%#$hashtag%", PDO::PARAM_STR);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        foreach ($result as $row) {
+            $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
+            $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
+            $timestamp = $row["timestamp"];
+            echo "<section id='messages'>";
+            echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
+            echo "<hr>";
+            echo "</section>";
+        }
+    } else {
+        echo "No messages with this hashtag.";
+    }
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
+?>

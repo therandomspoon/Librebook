@@ -9,6 +9,14 @@ function extractVideoId($url) {
     return isset($query['v']) ? $query['v'] : null;
 }
 
+function convertHashtagsToLinks($message) {
+    $pattern = '/#(\w+)/';
+    
+    $messageWithLinks = preg_replace($pattern, '<a href="../messages/hashtag.php?tag=$1">#$1</a>', $message);
+
+    return $messageWithLinks;
+}
+
 try {
     $conn = $pdo->query("SELECT `name`, `message`, `timestamp`
                         FROM messages
@@ -23,6 +31,8 @@ try {
                 $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
                 $timestamp = $row["timestamp"];
 
+                $message = convertHashtagsToLinks($message);
+
                 if (filter_var($message, FILTER_VALIDATE_URL) && 
                     (strpos($message, '.jpg') !== false || 
                      strpos($message, '.jpeg') !== false || 
@@ -30,11 +40,18 @@ try {
                      strpos($message, '.webp') !== false)) {
                     echo "<div><b>" . $name . ":</b> <br> <img src='" . $message . "' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: " . $timestamp . ")</div>";
                     echo "<hr>";
-                } elseif (strpos($message, 'https://ltbeta.epicsite.xyz/watch/?v=') !== false) {
+                } elseif (strpos($message, 'https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=') !== false) {
                     $videoId = extractVideoId($message);
                     if ($videoId) {
                         $videoUrl = "https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=" . $videoId . "&dl=dl&itag=18";
                         echo "<div><b>" . $name . ":</b> <br> <video controls><source src='" . $videoUrl . "' type='video/mp4'></video> <br> (Sent on: " . $timestamp . ")</div>";
+                        echo "<hr>";
+                    }
+                } elseif (strpos($message, 'https://www.youtube.com/watch?v=') !== false) {
+                    $videoId = extractVideoId($message);
+                    if ($videoId) {
+                        $videoUrl = "https://lt.epicsite.xyz/videodata/non-hls.php?id=" . $videoId . "&dl=dl&itag=18";
+                        echo "<div><b>" . $name . ":</b> <br> <video controls><source src='" . $videoUrl . "' type='video/mp4'></video> <br> (Sent on: " . $timestamp . ") </div>";
                         echo "<hr>";
                     }
                 } elseif (strpos($message, 'https://lt.epicsite.xyz/watch/?v=') !== false) {
@@ -60,4 +77,3 @@ try {
 }
 # style='width: 211px; height: 148px;
 ?>
-
