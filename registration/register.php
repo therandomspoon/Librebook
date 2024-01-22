@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $newUser = [
                 'username' => $username,
-                'email' => $email,
                 'pfp' => '../images/empty.webp',
                 'bio' => '',
                 'preferred_mode' => $defaultMode
