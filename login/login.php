@@ -18,12 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-
+        $_SESSION['sudopassword'] = $user['password']; //* its password but cooler
         echo 'Login successful! Welcome, ' . htmlspecialchars($user['username']) . '!';
         header('Location: ../main.php');
         exit();
     } else {
-        header('Location: ../errors/errorlog.html');
+        header('Location: ../errorlog.html');
         exit();
     }
 }
