@@ -16,7 +16,7 @@ $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
 $stmt->execute([$username]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION['currentpass'] = $user['password'];
-if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) {
+if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the cooler password to the one in sql to see if their account still exists
     session_destroy();
 } else {
 ?>
