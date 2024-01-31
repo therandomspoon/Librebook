@@ -8,16 +8,10 @@ function containsEmoji($string) {
     return preg_match('/[^\x00-\x7F]/', $string);
 }
 
-function isValidEmail($email) {
-    return filter_var($email, FILTER_VALIDATE_EMAIL);
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-    // set default
     $defaultMode = 'light';
 
     if (containsEmoji($username)) {
@@ -25,18 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if (!isValidEmail($email)) {
-        echo 'Error: Invalid email address.';
-        exit();
-    }
-
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ? OR email = ?');
-    $stmt->execute([$username, $email]);
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
+    $stmt->execute([$username]);
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-        $stmt = $pdo->prepare('INSERT INTO users (username, email, password, preferred_mode) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$username, $email, $password, $defaultMode]);
+        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode) VALUES (?, ?, ?)');
+        $stmt->execute([$username, $password, $defaultMode]);
 
         $jsonFile = '../user-profiles.json';
 
@@ -61,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Error: User profiles file not found';
         }
     } else {
-        echo 'Error: Username or email already exists.';
+        echo 'Error: Username already exists.';
     }
 }
 ?>
