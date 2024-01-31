@@ -2,7 +2,8 @@
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `preferred_mode` varchar(10) DEFAULT 'light'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- run this one to create the messages table;
