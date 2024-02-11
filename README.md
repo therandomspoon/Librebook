@@ -27,7 +27,14 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - Mysql server
 - Web server
 - PHP
-- 
+## Run these commands to be able to host it (debian linux tested)
+- sudo apt-get install php-mysql
+- sudo apt-get install php
+- (we recommend mariaDB) - sudo apt install mariadb-server
+- sudo apt install git
+- sudo apt install php
+
+
 > [!NOTE]
 > Please note that some features from the version we host will not be on the github immediately as it is a pre-alpha build
 
