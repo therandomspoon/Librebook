@@ -1,0 +1,6 @@
+# dont delete this unless you want peoples data to be leaked
+
+<FilesMatch "\.json$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
