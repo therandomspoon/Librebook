@@ -42,6 +42,7 @@ include '../cmode.php'
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include '../config.php';
+
 try {
     $hashtag = isset($_GET['tag']) ? $_GET['tag'] : '';
 
@@ -55,14 +56,28 @@ try {
     $stmt = $pdo->prepare($query);
     $stmt->bindValue(':hashtag', "%#$hashtag%", PDO::PARAM_STR);
     $stmt->execute();
-
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     if ($result) {
         foreach ($result as $row) {
             $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
             $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
             $timestamp = $row["timestamp"];
+            function extractID($string) {
+                $symbolPosition = strpos($string, '[#@');
+                if ($symbolPosition !== false) {
+                    $substringAfterSymbol = substr($string, $symbolPosition);
+                    $semicolonPosition = strpos($substringAfterSymbol, ';');
+                    if ($semicolonPosition !== false) {
+                        $numbers = substr($substringAfterSymbol, 3, $semicolonPosition - 3);
+                        $numbers = preg_replace("/[^0-9]/", "", $numbers);
+                        $replacement = "<a href='../messages/spmessages.php/?id=$numbers'>Reply to</a>";
+                        $string = substr_replace($string, $replacement, $symbolPosition, $semicolonPosition + 1);
+                    }
+                }
+            
+                return $string;
+            }
+            $message = extractID($message);
             echo "<section id='messages'>";
             echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
             echo "<hr>";

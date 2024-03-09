@@ -1,9 +1,53 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
-include '../config.php';
-session_start();
+ini_set('display_errors', 1);
 
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+} else {
+    header('Location: ../index.php');
+    exit();
+}
+
+include '../config.php';
+$stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+$stmt->execute([$username]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$_SESSION['currentpass'] = $user['password'];
+if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the cooler password to the one in sql to see if their account still exists
+    session_destroy();
+} else {
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>librebook</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <section id="head">
+        <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <h1 id="headl">Librebook</h1>
+    </section>
+    <br>
+    <div id="helloworld">
+        <p></p>
+        <a href="/deleteyou.php">Delete your account</a><a href="/settings.php" style="float: right;">Go to Settings</a>
+        <p></p>
+        <a href="/logout.php">Logout</a><a href="/main.php" style="float: right;">Take me to the main page</a>
+        <p></p>
+    </div>
+    <br>
+    <section id="messages">
+        <div id="success"></div>
+        <div id="error"></div>
+        <div id="messageList"></div>
+<?php
 function extractVideoId($url) {
     $parsedUrl = parse_url($url);
     parse_str($parsedUrl['query'], $query);
@@ -25,7 +69,6 @@ function extractID($string) {
 
     return $string;
 }
-
 function convertHashtagsToLinks($message) {
     $pattern = '/#(\w+)/';
     $messageWithLinks = preg_replace($pattern, '<a href="../messages/hashtag.php?tag=$1">#$1</a>', $message);
@@ -60,7 +103,6 @@ try {
             $timestamp = $row["timestamp"];
             $id = $row["id"];
 
-            // Extract IDs and convert hashtags to links before displaying the message
             $message = extractID($message);
             $message = convertHashtagsToLinks($message);
 
@@ -94,7 +136,7 @@ try {
                 }
             } else {
                 echo "<div><b>{$name}:</b> {$message} (Sent on: {$timestamp})</div>";
-                echo "<a href='../messages/reply.php?id=" . urlencode($id) . "'>Reply</a>";
+                echo "<a href='../reply.php?id=" . urlencode($id) . "'>Reply</a>";
                 echo "<hr>";
             }
         }
@@ -104,4 +146,11 @@ try {
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }
+?>
+    </section>
+</body>
+</html>
+<?php
+}
+include '../cmode.php'
 ?>

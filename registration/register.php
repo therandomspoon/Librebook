@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -7,7 +7,6 @@ function containsEmoji($string) {
     $string = preg_replace('/[^\w\s.,!?]/', '', $string);
     return preg_match('/[^\x00-\x7F]/', $string);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -24,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode) VALUES (?, ?, ?)');
-        $stmt->execute([$username, $password, $defaultMode]);
+        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode, following) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$username, $password, $defaultMode, '']);
 
         $jsonFile = '../user-profiles.json';
 
@@ -47,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../login/login.html');
             exit();
         } else {
-            echo 'Error: User profiles file not found';
+            header('Location: ../errors/erroreg.html');
         }
     } else {
-        echo 'Error: Username already exists.';
+        header('Location: ../errors/erroreg.html');
     }
 }
 ?>

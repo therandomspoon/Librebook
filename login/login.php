@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../main.php');
         exit();
     } else {
-        header('Location: ../errorlog.html');
+        header('Location: ../errors/errorlog.html');
         exit();
     }
 }

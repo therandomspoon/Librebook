@@ -1,0 +1,3 @@
+<!--#echo var="REQUEST_URI"-->
+<!--#config timefmt="%Y"-->
+<small>OLD-WHONNOCK <!--#echo var="DATE_LOCAL"--> &copy;</small>

@@ -4,13 +4,7 @@
             "username": "john_doe",
             "pfp": "https:\/\/images.unsplash.com\/photo-1701808913571-31d2112ffa7b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "bio": "I'm John Doe, a web developer from somewhere.",
-            "email": "john@example.com"
-        },
-        {
-            "username": "therandomspoon",
-            "pfp": "../images/spoon.png",
-            "bio": "Creator and Lead Developer of Librebook and a pretty stupid guy.\r\nUnsplash:https:\/\/unsplash.com\/@therandomspoon\r\nGithub:https:\/\/github.com\/therandomspoon\/",
-            "email": "admin@randspoon.co.uk"
+            "preferred_mode": "light"
         }
     ]
 }

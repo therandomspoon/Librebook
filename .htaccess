@@ -1,5 +1,6 @@
-# dont delete this unless you want peoples data to be leaked
+# dont delete this unless you want peoples data to be leaked which is like pretty poor of you to do.
 
 <Files "*.json">
     Require all denied
 </Files>
+

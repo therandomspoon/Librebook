@@ -11,6 +11,7 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 include 'config.php';
 $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
 $stmt->execute([$username]);
@@ -45,8 +46,9 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
         <p></p>
         <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
         <p></p>
-
+        <a href="/messages/followmes.php">See what the people you follow are saying!</a>
     </div>
+    
     <section id="searchbar">
         <form action="../profiles/profiles.php" id="searchform" method="get">
             <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
@@ -55,11 +57,12 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
     </section>
     <br>
     <section id="messages">
-        <h1>Sorry but the 'reply' function has been temporarily disabled due to various issues</h1>
+        <h1>Let the world know what you're thinking</h1>
+        <?php if (isset($_SESSION['replyto'])) { echo $_SESSION['replyto']; } ?>
         <form id="messageForm">
             <textarea id="message" name="message" rows="4" cols="50" required placeholder="let the world know what you're thinking"></textarea><p></p><button id="bootun" type="submit">Post</button>
             <hr>
-            <button type="button" onclick="updateMessages()">Refresh messages!</button>
+            <button type="button" onclick="updateMessages()">Refresh messages!</button><br><a href="../messages/clearrep.php">Clear reply</a>
         </form>
         <br>
     </section>
@@ -72,7 +75,6 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
     </section>
     <script>
         var userID = <?php echo json_encode($username); ?>;
-
         function updateMessages() {
             $.ajax({
                 type: "GET",

@@ -1,8 +1,71 @@
 <?php
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+} else {
+    header('Location: ../index.php');
+    exit();
+}
+
+
+include '../config.php';
+$stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+$stmt->execute([$username]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$_SESSION['currentpass'] = $user['password'];
+if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the cooler password to the one in sql to see if their account still exists
+    session_destroy();
+} else {
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>librebook</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <?php
+    include '../cmode.php';
+    ?>
+</head>
+<body>
+
+    <section id="head">
+        <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <h1 id="headl">Librebook</h1>
+    </section>
+    <br>
+    <div id="helloworld">
+        <?php
+        echo 'Welcome back ' . htmlspecialchars($username) . '!';
+        ?>
+        <p></p>
+        <a href="/deleteyou.php">Delete your account</a><a href="/settings.php" style="float: right;">Go to Settings</a>
+        <p></p>
+        <a href="/logout.php">Logout</a><a href="/main.php" style="float: right;">Take me to the main page</a>
+        <p></p>
+
+    </div>
+    <br>
+    <section id="messages">
+        <div id="success"></div>
+        <div id="error"></div>
+        <div id="messageList"></div>
+<?php
+error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include '../config.php';
-session_start();
+
+$loginuser = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+if (empty($loginuser)) {
+    header("Location: /path/to/redirected/page.php");
+    exit();
+}
 
 function extractVideoId($url) {
     $parsedUrl = parse_url($url);
@@ -25,7 +88,6 @@ function extractID($string) {
 
     return $string;
 }
-
 function convertHashtagsToLinks($message) {
     $pattern = '/#(\w+)/';
     $messageWithLinks = preg_replace($pattern, '<a href="../messages/hashtag.php?tag=$1">#$1</a>', $message);
@@ -33,25 +95,16 @@ function convertHashtagsToLinks($message) {
 }
 
 try {
-    $messageId = isset($_GET['id']) ? intval($_GET['id']) : null;
+    $stmt = $pdo->prepare("SELECT m.id, m.name, m.message, m.timestamp
+                            FROM messages m
+                            JOIN users u ON m.name = u.username
+                            WHERE u.following LIKE CONCAT('%', ?, '%')
+                            ORDER BY m.timestamp DESC");
 
-    if ($messageId) {
-        $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp`
-                            FROM messages
-                            WHERE id = :id
-                            ORDER BY `timestamp` DESC");
+    $stmt->bindParam(1, $loginuser, PDO::PARAM_STR);
+    $stmt->execute();
 
-        $stmt->bindParam(':id', $messageId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        $stmt = $pdo->query("SELECT `id`, `name`, `message`, `timestamp`
-                            FROM messages
-                            ORDER BY `timestamp` DESC");
-
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($result) {
         foreach ($result as $row) {
@@ -59,8 +112,7 @@ try {
             $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
             $timestamp = $row["timestamp"];
             $id = $row["id"];
-
-            // Extract IDs and convert hashtags to links before displaying the message
+            
             $message = extractID($message);
             $message = convertHashtagsToLinks($message);
 
@@ -92,9 +144,13 @@ try {
                     echo "<div><b>{$name}:</b> <br> <video controls><source src='{$videoUrl}' type='video/mp4'></video> <br> (Sent on: {$timestamp})</div>";
                     echo "<hr>";
                 }
+            } elseif (strstr($message, "|| reply - ")) {
+                    echo "<div><b>{$name}:</b> Reply to <a href='/messages/spmessages.php/?id=". $oid . "'>" . $oname . "</a> {$message} (Sent on: {$timestamp})</div>";
+                    echo " <a href='../messages/reply.php?name=" . urlencode($name) . "&message=" . urlencode($message) . "&timestamp=" . urlencode($timestamp) . "&id=" . urlencode($id) . "'>Reply</a>";
+                    echo "<hr>";
             } else {
                 echo "<div><b>{$name}:</b> {$message} (Sent on: {$timestamp})</div>";
-                echo "<a href='../messages/reply.php?id=" . urlencode($id) . "'>Reply</a>";
+                echo " <a href='../messages/reply.php'>Reply</a>";
                 echo "<hr>";
             }
         }
@@ -103,5 +159,12 @@ try {
     }
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
+}
+?>
+    </section>
+    <br>
+</body>
+</html>
+<?php
 }
 ?>

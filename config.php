@@ -1,9 +1,9 @@
 <?php
 
-$db_host = '';
-$db_name = '';
-$db_user = '';
-$db_password = '';
+$db_host = 'localhost';
+$db_name = 'messages';
+$db_user = 'adamg';
+$db_password = 'pirules';
 $sacredwork = ''; #for a future unreleased update regarding verifying accounts.
 
 try {

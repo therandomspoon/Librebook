@@ -13,13 +13,13 @@ function echoStylesheetTag($preferredMode) {
 
     switch ($preferredMode) {
         case 'dark':
-            $stylesheet = '../css/dark-mode.css';
+            $stylesheet = '/css/dark-mode.css';
             break;
         case 'blue':
-            $stylesheet = '../css/blue.css';
+            $stylesheet = '/css/blue.css';
             break;
         default:
-            $stylesheet = '../css/mainsite.css';
+            $stylesheet = '/css/mainsite.css';
     }
 
     echo '<link rel="stylesheet" href="' . $stylesheet . '">';
