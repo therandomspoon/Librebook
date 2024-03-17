@@ -21,7 +21,6 @@ if (empty($loginuser)) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
     
-    // Assuming the column representing the following is named 'following'
     $stmt = $pdo->prepare("UPDATE users SET following = 
                             CASE 
                                 WHEN following LIKE CONCAT('%', ?, '%') THEN 
