@@ -1,7 +1,0 @@
-RewriteEngine Off
-Options Indexes Includes
-IndexOptions FancyIndexing SuppressHTMLPreamble XHTML IconsAreLinks FoldersFirst SuppressDescription
-
-HeaderName /files/HEADER.shtml
-ReadmeName /files/README.shtml
-

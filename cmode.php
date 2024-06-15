@@ -18,6 +18,18 @@ function echoStylesheetTag($preferredMode) {
         case 'blue':
             $stylesheet = '/css/blue.css';
             break;
+        case 'nothing':
+            $stylesheet = '';
+            break;
+        case 'opposite':
+            $stylesheet = '/css/opposite.css';
+            break;
+        case 'liberatube':
+            $stylesheet = '/css/liberatube.css';
+            break;
+        case 'nature':
+            $stylesheet = '/css/green.css';
+            break;
         default:
             $stylesheet = '/css/mainsite.css';
     }

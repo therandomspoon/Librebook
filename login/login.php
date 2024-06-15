@@ -15,15 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         session_regenerate_id(true);
-
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['sudopassword'] = $user['password']; //* its password but cooler
+        $_SESSION['kmode'] = $user['kids'];
         echo 'Login successful! Welcome, ' . htmlspecialchars($user['username']) . '!';
         header('Location: ../main.php');
-        exit();
     } else {
-        header('Location: ../errors/errorlog.html');
+        header('Location: /errors/errorlog.html');
         exit();
     }
 }

@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $defaultMode = 'light';
+    $defaultKids = 'off';
 
     if (containsEmoji($username)) {
         echo 'Error: Usernames cannot contain emojis.';
@@ -23,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode, following) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$username, $password, $defaultMode, '']);
+        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode, following, kids) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$username, $password, $defaultMode, '', $defaultKids]);
 
         $jsonFile = '../user-profiles.json';
 

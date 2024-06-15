@@ -105,13 +105,18 @@ try {
 
             $message = extractID($message);
             $message = convertHashtagsToLinks($message);
-
+            echo '<meta property="og:title" content="' . $message . '">';
+            echo '<meta property="og:description" content="Sent from' . $name . 'at' . $timestamp .'">';
+            echo '<meta property="og:url" content="http://librebook.co.uk/messages/spmessages.php?id=' . $id . '">';
+            echo '<meta property="og:type" content="profile">';
+            echo '<meta name="twitter:card" content="summary_large_image">';
+            echo '<meta name="twitter:site" content="@thatrandomspoon">';
             if (filter_var($message, FILTER_VALIDATE_URL) && 
                 (strpos($message, '.jpg') !== false || 
                 strpos($message, '.jpeg') !== false || 
                 strpos($message, '.png') !== false || 
                 strpos($message, '.webp') !== false)) {
-                echo "<div><b>{$name}:</b> <br> <img src='{$message}' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: {$timestamp})</div>";
+                echo "<div id='imag'><b>{$name}:</b> <br> <img src='{$message}' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: {$timestamp})</div>";
                 echo "<hr>";
             } elseif (strpos($message, 'https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=') !== false) {
                 $videoId = extractVideoId($message);

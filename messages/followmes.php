@@ -121,7 +121,7 @@ try {
                 strpos($message, '.jpeg') !== false || 
                 strpos($message, '.png') !== false || 
                 strpos($message, '.webp') !== false)) {
-                echo "<div><b>{$name}:</b> <br> <img src='{$message}' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: {$timestamp})</div>";
+                echo "<div id='imag'><b>{$name}:</b> <br> <img src='{$message}' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: {$timestamp})</div>";
                 echo "<hr>";
             } elseif (strpos($message, 'https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=https://ltbeta.epicsite.xyz/videodata/non-hls.php?id=') !== false) {
                 $videoId = extractVideoId($message);

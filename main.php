@@ -52,7 +52,7 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
     <section id="searchbar">
         <form action="../profiles/profiles.php" id="searchform" method="get">
             <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
-            <button type="submit">Search!<i class="fa fa-search"></i></button>
+            <button type="submit">Search!<i class="fa fa-search"></i></button><p>Powered by </p><a href="qmeds.html" style="color: white;">QMEDS</a>
         </form>
     </section>
     <br>
@@ -81,7 +81,6 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
                 url: "../messages/messages.php",
                 success: function (response) {
                     $("#messageList").html(response);
-                    alert('Messages loaded');
                     console.log('Messages loaded');
                 },
                 error: function (xhr, status, error) {
@@ -98,7 +97,7 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
                 var message_text = $("#message").val();
                 $.ajax({
                     type: "POST",
-                    url: "../messages/submit.php",
+                    url: "../messages/ksubmit.php",
                     data: { name: name, message_text: message_text },
                     success: function (response) {
                         $("#message").val("");
@@ -119,7 +118,7 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
 
                 $.ajax({
                     type: "POST",
-                    url: "../messages/submit.php",
+                    url: "../messages/ksubmit.php",
                     data: { name: name, message_text: message_text, parent_id: parentMessageId },
                     success: function (response) {
                         $("#success").text(response).fadeIn().delay(3000).fadeOut();
@@ -135,6 +134,23 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
             updateMessages();
         });
     </script>
+<script>
+function loadVideo(container) {
+    var videoUrl = container.getAttribute('data-src');
+    var videoElement = document.createElement('video');
+    videoElement.setAttribute('controls', 'controls');
+    videoElement.setAttribute('autoplay', 'autoplay');
+    
+    var sourceElement = document.createElement('source');
+    sourceElement.setAttribute('src', videoUrl);
+    sourceElement.setAttribute('type', 'video/mp4');
+    
+    videoElement.appendChild(sourceElement);
+    container.innerHTML = '';
+    container.appendChild(videoElement);
+}
+</script>
+
 
     <script src="script.js"></script>
 </body>

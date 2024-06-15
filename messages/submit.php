@@ -9,6 +9,16 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = htmlspecialchars($_POST["name"], ENT_QUOTES, 'UTF-8');
         $message_text = $_POST["message_text"];
+        $kmode = $_SESSION['kmode'];
+        if ($kmode == 'on') {
+            $forbiddenWords = json_decode(file_get_contents('bad-words.json'), true);
+            foreach ($forbiddenWords as $word) {
+                if (strpos($message_text, $word) !== false) {
+                    echo "Warning! Your message contained language not allowed in kids mode! You can bypass this by disabling it in settings";
+                    return;
+                }
+            }
+        }
 
         if (empty($name) || empty($message_text)) {
             echo "Sender name and message are required!";
