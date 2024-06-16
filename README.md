@@ -55,29 +55,7 @@ First version (genesis) finished on the 22/12/2023 and released on github.
 - reactions 
 - global access sql server for messages (soon but not as soon as deleting accounts but still more soon than my hosted ver)
 - friending system
-
-# Screenshots (genesis ver)
-## landing page
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/indexpage.png)
-
-## messaging page
-(yours will not have these specific images because they are all on my sql server)
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/mainpageexample.png)
-
-## editing profiles
-(this is my one not everyones)
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/customprofilesexample.png)
-
-## viewing others profiles
-(even shows the messages that only they sent!)
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/searchingupothersprofiles.png)
-
-# A photo of Leo the lion the mascot of Librebook created by Bing AI
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/leo.png)
-
-# Librebook is coconutified!
-![image](https://github.com/therandomspoon/librebook/blob/main/screenshots/coconutted.png)
-
+  
 <hr>
 
 # Welcome to Librebook !
