@@ -1,9 +1,10 @@
 <?php
 session_start();
-include '../cmode.php';
-include '../config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+include '../cmode.php';
+include '../config.php';
 $_SESSION['mostrecent'] = isset($_GET['id']) ? $_GET['id'] : '';
 
 $sui = isset($_SESSION['sui']) ? $_SESSION['sui'] : null;
@@ -48,7 +49,6 @@ function convertHashtagsToLinks($message) {
     <title>User Profile</title>
     <style>
         #blading {
-            border-radius: 50%;
             width: 150px;
             height: 150px;
         }

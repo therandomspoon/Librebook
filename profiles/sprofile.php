@@ -80,17 +80,39 @@ include '../cmode.php';
             <img src="<?php echo $foundProfile['pfp']; ?>" alt="Profile Picture">
             <h1>Username: <?php echo $foundProfile['username']; ?></h1>
             <p>Bio: <?php echo $foundProfile['bio']; ?></p>
+            <p>Registered Email: <?php echo $foundProfile['email']; ?></p>
             <h2>Edit Profile</h2>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <label for="new_pfp">New Profile Picture URL:</label><br>
-                <input type="text" name="new_pfp" id="new_pfp" placeholder="Enter new profile picture URL" value="<?php echo $foundProfile['pfp']; ?>">
-                <br>
-                <label for="new_bio">New Bio:</label>
-                <br>
-                <textarea name="new_bio" id="new_bio" placeholder="Enter new bio" rows="4" cols="50"><?php echo $foundProfile['bio']; ?></textarea>
-                <br>
-                <button type="submit">Update Profile</button>
+                <label for="new_pfp">New Profile Picture:</label><br>
+                <?php echo "-- current pfp:" . $foundProfile['pfp']; ?>
+                <p></p>
+                <input style="width: 50%;" type="text" name="new_pfp" list="pfp_list" id="new_pfp" placeholder="Enter new profile picture URL" value="">
+                <datalist id="pfp_list">
+                    <option value="red default -- TESTING ASSET" data-path="../pfps/red.webp">red default -- TESTING ASSET</option>
+                    <option value="blue default -- TESTING ASSET" data-path="../pfps/blue.webp">blue default -- TESTING ASSET</option>
+                    <option value="green default -- TESTING ASSET" data-path="../pfps/green.webp">green default -- TESTING ASSET</option>
+                    <option value="yellow default -- TESTING ASSET" data-path="../pfps/yellow.webp">yellow default -- TESTING ASSET</option>
+                    <option value="default" data-path="../pfps/empty.webp">default</option>
+                </datalist>
+            <br>
+            <label for="new_bio">New Bio:</label>
+            <br>
+            <textarea style="max-height: 20%;" name="new_bio" id="new_bio" placeholder="Enter new bio" rows="4" cols="50"><?php echo $foundProfile['bio']; ?></textarea>
+            <hr>
+            <button type="submit">Update Profile</button>
             </form>
+<script>
+    document.getElementById('new_pfp').addEventListener('input', function () {
+        var value = this.value;
+        var options = document.getElementById('pfp_list').options;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value === value) {
+                this.value = options[i].getAttribute('data-path');
+                break;
+            }
+        }
+    });
+</script>
         </section>
         <br></br>
     </section>

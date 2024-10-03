@@ -1,9 +1,6 @@
 <?php
 include 'config.php';
 
-$hitCounterFile = 'mainhitcounter.txt';
-$hitCount = (int)file_get_contents($hitCounterFile);
-file_put_contents($hitCounterFile, $hitCount);
 $usersQuery = $pdo->query("SELECT COUNT(*) as userCount FROM users");
 $userData = $usersQuery->fetch(PDO::FETCH_ASSOC);
 $userCount = $userData['userCount'];
@@ -45,7 +42,6 @@ $mostCommonUsernameCount = $mostCommonUsernameData['nameCount'];
             <?php
             echo "<p>Total Users: $userCount</p>";
             echo "<p>Total Messages: $messageCount</p>";
-            echo "<p>Main.php (messages page) Hits: $hitCount</p>";
             echo "<p>User who sent the most messages: $mostCommonUsername (Count: $mostCommonUsernameCount)</p>";
             ?>
         </section>

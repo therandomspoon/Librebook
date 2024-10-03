@@ -1,21 +1,26 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/mainsite.css">
+    <title>Librebook Registration</title>
 </head>
 <body>
 <section id="head">
-    <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+    <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;" alt="Librebook Logo">
     <h1 id="headl">Librebook</h1>
 </section>
 <section id="messages">
-<h1>Welcome to Librebook! Glad you're here!</h1>
-<form action="register.php" method="post">
-    Username: <input type="text" name="username" required><br>
-    Password: <input type="password" name="password" required><br>
-    <input type="submit" id="trinity" value="Register">
-</form>
-<br></br>
-<a href="../login/login.html">Meant to login? No problem! Press here to login!</a>
+    <h1>Welcome to Librebook! Glad you're here!</h1>
+    <form action="oldregister.php" method="post">
+        Username: <input type="text" name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        <input type="submit" id="trinity" value="Register">
+    </form>
+    <br>
+    <a href="../login/login.html">Meant to login? No problem! Press here to login!</a>
 </section>
 <script src="../script.js"></script>
 </body>
+</html>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Login successful! Welcome, ' . htmlspecialchars($user['username']) . '!';
         header('Location: ../main.php');
     } else {
-        header('Location: /errors/errorlog.html');
+        header('Location: errorlog.html');
         exit();
     }
 }

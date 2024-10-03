@@ -36,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 echo $searchTerm;
 // Assign the value of $searchTerm to the 'sterm' session variable
 
-header("Location: ../profiles/profiles.php?search=" . $searchusern);
+header("Location: ../profiles/rprofiles.php?search=" . $searchusern);
 exit();
 ?>

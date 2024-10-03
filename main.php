@@ -52,7 +52,7 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
     <section id="searchbar">
         <form action="../profiles/profiles.php" id="searchform" method="get">
             <input id="searchbut" type="text" placeholder="Search profiles.." name="search">
-            <button type="submit">Search!<i class="fa fa-search"></i></button><p>Powered by </p><a href="qmeds.html" style="color: white;">QMEDS</a>
+            <button type="submit">Search!<i class="fa fa-search"></i></button>
         </form>
     </section>
     <br>

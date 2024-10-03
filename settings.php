@@ -39,6 +39,14 @@ include 'cmode.php';
 #kids {
     color: green;
 }
+#dc {
+    background-color: #32CD32;
+    color: white;
+    font-weight: bold;
+    border: 2px #32CD32;
+    border-radius: 8px;
+    padding: 10px;
+}
 </style>
 <body>
     <section id="head">
@@ -47,6 +55,10 @@ include 'cmode.php';
     </section>
     <section id="messages">
     <h1>User Settings</h1>
+    <hr>
+    <br>
+    <a id="dc" href="data-center.php">User Data Center</a>
+    <p>Manage your data on librebook</p>
     <hr>
     <form method="post" action="settings.php">
         <p></p>
@@ -58,7 +70,6 @@ include 'cmode.php';
             <option value="liberatube" <?php echo ($currentMode === 'liberatube') ? 'selected' : ''; ?>>Liberatube collab</option>
             <option value="nothing" <?php echo ($currentMode === 'nothing') ? 'selected' : ''; ?>>De-bloated&trade;</option>
             <option value="opposite" <?php echo ($currentMode === 'opposite') ? 'selected' : ''; ?>>Opposite day - Become thankful for the colour scheme!</option>
-            <option value="nature" <?php echo ($currentMode === 'nature') ? 'selected' : ''; ?>>Nature day - In celebration of Earth day!</option>
         </select>
         <p></p>
         <hr>
