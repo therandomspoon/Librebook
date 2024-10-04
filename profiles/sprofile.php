@@ -88,10 +88,10 @@ include '../cmode.php';
                 <p></p>
                 <input style="width: 50%;" type="text" name="new_pfp" list="pfp_list" id="new_pfp" placeholder="Enter new profile picture URL" value="">
                 <datalist id="pfp_list">
-                    <option value="red default -- TESTING ASSET" data-path="../pfps/red.webp">red default -- TESTING ASSET</option>
-                    <option value="blue default -- TESTING ASSET" data-path="../pfps/blue.webp">blue default -- TESTING ASSET</option>
-                    <option value="green default -- TESTING ASSET" data-path="../pfps/green.webp">green default -- TESTING ASSET</option>
-                    <option value="yellow default -- TESTING ASSET" data-path="../pfps/yellow.webp">yellow default -- TESTING ASSET</option>
+                    <option value="red default" data-path="../pfps/red.webp">red default</option>
+                    <option value="blue default" data-path="../pfps/blue.webp">blue defaultT</option>
+                    <option value="green default" data-path="../pfps/green.webp">green default</option>
+                    <option value="yellow default" data-path="../pfps/yellow.webp">yellow default</option>
                     <option value="default" data-path="../pfps/empty.webp">default</option>
                 </datalist>
             <br>
