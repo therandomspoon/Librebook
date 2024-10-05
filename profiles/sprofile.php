@@ -73,6 +73,10 @@ include '../cmode.php';
         <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
+    <br>
+    <div id="helloworld">
+        <a href="../main.php">Take me back!</a>
+    </div>
     <a href="../main.php">Take me back!</a>
     <section id="sendamess">
         <section id="messages">
