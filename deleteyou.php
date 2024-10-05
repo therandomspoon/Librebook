@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtDeleteUser = $pdo->prepare('DELETE FROM users WHERE username = ?');
     $stmtDeleteUser->execute([$usernameToDelete]);
 
-    // Destroy the session and log the user out
+
     session_destroy();
     header('Location: index.php');
     exit();
@@ -30,9 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php
-include 'cmode.php';
+
+include 'cmode.php'; 
 ?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,3 +61,4 @@ include 'cmode.php';
     </section>
 </body>
 </html>
+
