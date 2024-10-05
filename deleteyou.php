@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtDeleteUser = $pdo->prepare('DELETE FROM users WHERE username = ?');
     $stmtDeleteUser->execute([$usernameToDelete]);
 
-    $jsonFile = '../user-profiles.json';
+    $jsonFile = 'user-profiles.json';
 
     if (file_exists($jsonFile)) {
         $jsonData = file_get_contents($jsonFile);
