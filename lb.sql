@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4deb2+deb11u1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql308.infinityfree.com
--- Generation Time: Oct 03, 2024 at 03:37 PM
--- Server version: 10.6.19-MariaDB
--- PHP Version: 7.2.22
+-- Host: localhost:3306
+-- Generation Time: Oct 05, 2024 at 09:32 PM
+-- Server version: 10.5.23-MariaDB-0+deb11u1-log
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `if0_35666608_messages`
+-- Database: `messages`
 --
 
 -- --------------------------------------------------------
@@ -39,6 +38,28 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
+INSERT INTO `messages` (`id`, `name`, `message`, `timestamp`) VALUES
+(1, 'randspoon', 'hello', '2024-10-04 22:19:51'),
+(2, 'adamg', 'hello', '2024-10-05 20:12:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `username` varchar(255) DEFAULT NULL,
+  `pfp` varchar(255) DEFAULT NULL,
+  `bio` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`username`, `pfp`, `bio`) VALUES
+('adamg', '../images/empty.webp', '');
 
 -- --------------------------------------------------------
 
@@ -49,7 +70,6 @@ CREATE TABLE `messages` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `preferred_mode` varchar(10) DEFAULT 'light',
   `following` varchar(255) DEFAULT '',
@@ -59,6 +79,11 @@ CREATE TABLE `users` (
 --
 -- Dumping data for table `users`
 --
+
+INSERT INTO `users` (`id`, `username`, `password`, `preferred_mode`, `following`, `kids`) VALUES
+(1, 'randspoon', '$2y$10$PKYRbSkt1/it2pYx3uDiE.f9BNolSnkEaNTNr5A6PHFTma6ZOJoye', 'blue', 'randspoon', 'off'),
+(7, 'adamg', '$2y$10$DMQZ4YWgLB7nr2jqHGlqN..IiCZVFSezY6UgrQe.mJtccc40gXBfK', 'blue', ', adamg', 'off');
+
 --
 -- Indexes for dumped tables
 --
@@ -83,13 +108,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

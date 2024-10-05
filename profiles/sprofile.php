@@ -1,56 +1,40 @@
 <?php
 session_start();
+include '../config.php'; // Database connection
 
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-    $username = $_SESSION['username'];
-    $jsonFile = '../user-profiles.json';
-
-    if (file_exists($jsonFile)) {
-        $jsonData = file_get_contents($jsonFile);
-        $userProfiles = json_decode($jsonData, true);
-
-        if ($userProfiles === null && json_last_error() !== JSON_ERROR_NONE) {
-            echo '<p>Error decoding JSON: ' . json_last_error_msg() . '</p>';
-        } else {
-            $foundProfile = null;
-
-            foreach ($userProfiles['users'] as $profile) {
-                if ($profile['username'] === $username) {
-                    $foundProfile = $profile;
-                    break;
-                }
-            }
-
-            if (!$foundProfile) {
-                echo '<p>User profile not found</p>';
-            }
-        }
-    } else {
-        echo '<p>Error: User profiles file not found</p>';
-    }
-} else {
+if (!isset($_SESSION['user_id'])) {
     header('Location: ../login.html');
     exit();
 }
 
+$userId = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+
+// Fetch user profile from the database
+$stmt = $pdo->prepare('SELECT username, pfp, bio FROM profiles WHERE username = ?');
+$stmt->execute([$username]);
+$foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$foundProfile) {
+    echo '<p>User profile not found</p>';
+    exit();
+}
+
+// If the form is submitted, update the user profile in the database
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newPfp = isset($_POST['new_pfp']) ? $_POST['new_pfp'] : $foundProfile['pfp'];
     $newBio = isset($_POST['new_bio']) ? htmlspecialchars($_POST['new_bio']) : $foundProfile['bio'];
-    
-    foreach ($userProfiles['users'] as &$profile) {
-        if ($profile['username'] === $username) {
-            $profile['pfp'] = $newPfp;
-            $profile['bio'] = $newBio;
-            break;
-        }
-    }
-    
-    file_put_contents($jsonFile, json_encode($userProfiles, JSON_PRETTY_PRINT));
+
+    // Update the profile in the database
+    $stmtUpdate = $pdo->prepare('UPDATE profiles SET pfp = ?, bio = ? WHERE username = ?');
+    $stmtUpdate->execute([$newPfp, $newBio, $username]);
+
+    // Reload the updated profile data
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit();
 }
 ?>
+
 <?php
 include '../cmode.php';
 ?>
@@ -73,18 +57,20 @@ include '../cmode.php';
         <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
-    <a href="../main.php">Take me back!</a>
+    <br>
+    <div id="helloworld">
+        <a href="../main.php">Take me back!</a>
+    </div>    
     <section id="sendamess">
         <section id="messages">
             <h1>My Profile</h1>
             <img src="<?php echo $foundProfile['pfp']; ?>" alt="Profile Picture">
             <h1>Username: <?php echo $foundProfile['username']; ?></h1>
             <p>Bio: <?php echo $foundProfile['bio']; ?></p>
-            <p>Registered Email: <?php echo $foundProfile['email']; ?></p>
             <h2>Edit Profile</h2>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <label for="new_pfp">New Profile Picture:</label><br>
-                <?php echo "-- current pfp:" . $foundProfile['pfp']; ?>
+                <?php echo "-- current pfp: " . $foundProfile['pfp']; ?>
                 <p></p>
                 <input style="width: 50%;" type="text" name="new_pfp" list="pfp_list" id="new_pfp" placeholder="Enter new profile picture URL" value="">
                 <datalist id="pfp_list">

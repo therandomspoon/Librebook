@@ -12,7 +12,6 @@ $oname = isset($_SESSION['oname']) ? $_SESSION['oname'] : null;
 $omessage = isset($_SESSION['omessage']) ? $_SESSION['omessage'] : null;
 $otime = isset($_SESSION['otimestamp']) ? $_SESSION['otimestamp'] : null;
 $oid = isset($_SESSION['oid']) ? $_SESSION['oid'] : null;
-
 function extractVideoId($url) {
     $parsedUrl = parse_url($url);
     parse_str($parsedUrl['query'], $query);
@@ -61,7 +60,7 @@ function convertHashtagsToLinks($message) {
     </section>
     <br>
     <div id="helloworld">
-    <a href="../main.php">Take me back!</a>
+        <a href="../main.php">Take me back!</a>
     </div>
     <section id="sendamess">
     <?php
@@ -73,40 +72,12 @@ function convertHashtagsToLinks($message) {
             echo "Please enter a search term.";
             echo '</section>';
         } else {
-            $_SESSION['sterm'] = $searchTerm;
-            $jsonFile = '../user-profiles.json';
+            $_SESSION['searchTerm'] = $searchTerm;
 
-            if (file_exists($jsonFile)) {
-                $jsonData = file_get_contents($jsonFile);
-                $userProfiles = json_decode($jsonData, true);
-
-                if ($userProfiles === null && json_last_error() !== JSON_ERROR_NONE) {
-                    echo '<section id="messages">';
-                    echo '<p>Error decoding JSON: ' . json_last_error_msg() . '</p>';
-                    echo '</section>';
-                } else {
-                    $foundProfile = null;
-
-                    foreach ($userProfiles['users'] as $profile) {
-                        if (stripos($profile['username'], $searchTerm) !== false) {
-                            $foundProfile = $profile;
-                            $_SESSION['searchTerm'] = $searchTerm;
-                            break;
-                        }
-                    }
-
-                    if ($foundProfile === null) {
-                        echo '<section id="messages">';
-                        echo "<h1 style='text-align: center'>User does not exist or their account has been deleted.</h1>";
-                        echo '<img src="../images/notfound.png" alt="image not found as well. its not your lucky day" style="display: block; margin-left: auto; margin-right: auto;">';
-                        echo '</section>';
-                    }
-                }
-            } else {
-                echo '<section id="messages">';
-                echo "JSON file not found.";
-                echo '</section>';
-            }
+            // Search for user in the database
+            $stmt = $pdo->prepare("SELECT username, bio, pfp FROM profiles WHERE username LIKE :searchTerm LIMIT 1");
+            $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
+            $foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($foundProfile) {
                 echo '<meta property="og:title" content="' . htmlspecialchars($foundProfile['username']) . '">';
@@ -126,6 +97,7 @@ function convertHashtagsToLinks($message) {
                 echo '<input type="submit" value="Follow/Unfollow" />';
                 echo '</form>';
 
+                // Fetch followers from the database
                 $stmt = $pdo->prepare("SELECT following FROM users WHERE username = ?");
                 $stmt->execute([$foundProfile['username']]);
                 $followers = $stmt->fetchColumn();
@@ -146,27 +118,10 @@ function convertHashtagsToLinks($message) {
                 try {
                     $messageId = isset($_GET['id']) ? intval($_GET['id']) : null;
 
-                    if ($messageId) {
-                        $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp`
-                                            FROM messages
-                                            WHERE name = :name
-                                            ORDER BY `timestamp` DESC");
-
-                        $stmt->bindParam(':name', $foundProfile['username'], PDO::PARAM_STR);
-                        $stmt->execute();
-
-                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    } else {
-                        $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp`
-                                            FROM messages
-                                            WHERE name = :name
-                                            ORDER BY `timestamp` DESC");
-
-                        $stmt->bindParam(':name', $foundProfile['username'], PDO::PARAM_STR);
-                        $stmt->execute();
-
-                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    }
+                    $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp` FROM messages WHERE name = :name ORDER BY `timestamp` DESC");
+                    $stmt->bindParam(':name', $foundProfile['username'], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($result) {
                         foreach ($result as $row) {
@@ -174,14 +129,14 @@ function convertHashtagsToLinks($message) {
                             $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
                             $timestamp = $row["timestamp"];
                             $id = $row["id"];
-                            
+
                             $message = extractID($message);
                             $message = convertHashtagsToLinks($message);
 
-                            if (filter_var($message, FILTER_VALIDATE_URL) && 
-                                (strpos($message, '.jpg') !== false || 
-                                strpos($message, '.jpeg') !== false || 
-                                strpos($message, '.png') !== false || 
+                            if (filter_var($message, FILTER_VALIDATE_URL) &&
+                                (strpos($message, '.jpg') !== false ||
+                                strpos($message, '.jpeg') !== false ||
+                                strpos($message, '.png') !== false ||
                                 strpos($message, '.webp') !== false)) {
                                 echo "<div><b>{$name}:</b> <br> <img src='{$message}' alt='Image' style='max-width: 600px; height: 100%; max-height: 600px;'> <br> (Sent on: {$timestamp})</div>";
                                 echo "<hr>";
@@ -222,10 +177,15 @@ function convertHashtagsToLinks($message) {
                 } catch (PDOException $e) {
                     die("Error: " . $e->getMessage());
                 }
+            } else {
+                echo '<section id="messages">';
+                echo "<h1 style='text-align: center'>User does not exist or their account has been deleted.</h1>";
+                echo '<img src="../images/notfound.png" alt="image not found as well. its not your lucky day" style="display: block; margin-left: auto; margin-right: auto;">';
+                echo '</section>';
             }
         }
     }
     ?>
-    </section>  
+    </section>
 </body>
 </html>
