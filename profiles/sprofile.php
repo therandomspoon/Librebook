@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php'; // Database connection
+include '../config.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../login.html');
@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
-// Fetch user profile from the database
 $stmt = $pdo->prepare('SELECT username, pfp, bio FROM profiles WHERE username = ?');
 $stmt->execute([$username]);
 $foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -20,16 +19,13 @@ if (!$foundProfile) {
     exit();
 }
 
-// If the form is submitted, update the user profile in the database
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newPfp = isset($_POST['new_pfp']) ? $_POST['new_pfp'] : $foundProfile['pfp'];
     $newBio = isset($_POST['new_bio']) ? htmlspecialchars($_POST['new_bio']) : $foundProfile['bio'];
 
-    // Update the profile in the database
     $stmtUpdate = $pdo->prepare('UPDATE profiles SET pfp = ?, bio = ? WHERE username = ?');
     $stmtUpdate->execute([$newPfp, $newBio, $username]);
 
-    // Reload the updated profile data
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit();
 }
