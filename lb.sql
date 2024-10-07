@@ -38,9 +38,6 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `name`, `message`, `timestamp`) VALUES
-(1, 'randspoon', 'hello', '2024-10-04 22:19:51'),
-(2, 'adamg', 'hello', '2024-10-05 20:12:17');
 
 -- --------------------------------------------------------
 
@@ -58,8 +55,6 @@ CREATE TABLE `profiles` (
 -- Dumping data for table `profiles`
 --
 
-INSERT INTO `profiles` (`username`, `pfp`, `bio`) VALUES
-('adamg', '../images/empty.webp', '');
 
 -- --------------------------------------------------------
 
@@ -79,10 +74,6 @@ CREATE TABLE `users` (
 --
 -- Dumping data for table `users`
 --
-
-INSERT INTO `users` (`id`, `username`, `password`, `preferred_mode`, `following`, `kids`) VALUES
-(1, 'randspoon', '$2y$10$PKYRbSkt1/it2pYx3uDiE.f9BNolSnkEaNTNr5A6PHFTma6ZOJoye', 'blue', 'randspoon', 'off'),
-(7, 'adamg', '$2y$10$DMQZ4YWgLB7nr2jqHGlqN..IiCZVFSezY6UgrQe.mJtccc40gXBfK', 'blue', ', adamg', 'off');
 
 --
 -- Indexes for dumped tables
