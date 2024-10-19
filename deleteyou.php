@@ -10,18 +10,14 @@ if (!isset($_SESSION['username'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usernameToDelete = $_SESSION['username'];
 
-    // Delete user's messages
     $stmtDeleteMessages = $pdo->prepare('DELETE FROM messages WHERE name = ?');
     $stmtDeleteMessages->execute([$usernameToDelete]);
 
-    // Delete user's profile data from 'profiles' table
-    $stmtDeleteProfile = $pdo->prepare('DELETE FROM profiles WHERE username = ?');
-    $stmtDeleteProfile->execute([$usernameToDelete]);
-
-    // Delete user from 'users' table
     $stmtDeleteUser = $pdo->prepare('DELETE FROM users WHERE username = ?');
     $stmtDeleteUser->execute([$usernameToDelete]);
 
+    $stmtDeleteProfile = $pdo->prepare('DELETE FROM profiles WHERE username = ?');
+    $stmtDeleteProfile->execute([$usernameToDelete]);
 
     session_destroy();
     header('Location: index.php');
@@ -30,11 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php
-
-include 'cmode.php'; 
+include 'cmode.php';
 ?>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,4 +55,3 @@ include 'cmode.php';
     </section>
 </body>
 </html>
-

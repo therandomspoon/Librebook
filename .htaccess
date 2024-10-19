@@ -1,0 +1,14 @@
+# dont delete this unless you want peoples data to be leaked which is like pretty poor of you to do.
+
+<Files "*.json">
+    Require all denied
+</Files>
+<Directory "/pfp/">
+    Order Allow,Deny
+    Deny from all
+</Directory>
+deny from 10.24.223.254
+deny from 10.24.216.32
+deny from 3.10.24.85
+deny from 109.74.241.4
+php_value date.timezone UTC

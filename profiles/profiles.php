@@ -49,7 +49,6 @@
         } else {
             $_SESSION['sterm'] = $searchTerm;
 
-            // Search for similar users in the database
             $stmt = $pdo->prepare("SELECT username FROM users WHERE username LIKE :searchTerm");
             $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
             $similarProfiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
