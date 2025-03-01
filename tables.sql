@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql308.infinityfree.com
--- Generation Time: Oct 19, 2024 at 10:39 AM
+-- Generation Time: Mar 01, 2025 at 05:42 PM
 -- Server version: 10.6.19-MariaDB
 -- PHP Version: 7.2.22
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `if0_35666608_messages`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dm`
+--
+
+CREATE TABLE `dm` (
+  `sender` varchar(255) NOT NULL,
+  `reciever` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -50,19 +63,6 @@ CREATE TABLE `profiles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `smessages`
---
-
-CREATE TABLE `smessages` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `message` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -72,7 +72,8 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `preferred_mode` varchar(10) DEFAULT 'light',
   `following` varchar(255) DEFAULT '',
-  `kids` varchar(10) NOT NULL DEFAULT 'off'
+  `kids` varchar(10) NOT NULL DEFAULT 'off',
+  `apikey` varchar(64) DEFAULT 'NOT CREATED'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
