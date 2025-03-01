@@ -47,6 +47,8 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
         <a href="../logout.php">Logout</a><a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
         <p></p>
         <a href="/messages/followmes.php">See what the people you follow are saying!</a>
+        <p></p>
+        <a href="/messages/dm.php">Your Direct Messages</a>
     </div>
     
     <section id="searchbar">

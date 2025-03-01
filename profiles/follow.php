@@ -20,17 +20,19 @@ if (empty($loginuser)) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
-
-    // Assuming the column representing the following is named 'following'
-    $stmt = $pdo->prepare("UPDATE users SET following =
-                            CASE
-                                WHEN following LIKE CONCAT('%', ?, '%') THEN
-                                    TRIM(BOTH ', ' FROM REPLACE(CONCAT(', ', following, ', '), CONCAT(', ', ?, ', '), ', '))
-                                ELSE
+    
+    // Updated SQL query to avoid adding a comma and space if 'following' is empty
+    $stmt = $pdo->prepare("UPDATE users SET following = 
+                            CASE 
+                                WHEN following LIKE CONCAT('%', ?, '%') THEN 
+                                    TRIM(BOTH ', ' FROM REPLACE(REPLACE(CONCAT(', ', following, ', '), ', ,', ','), CONCAT(', ', ?, ', '), ', '))
+                                WHEN following = '' THEN 
+                                    ?
+                                ELSE 
                                     CONCAT(following, ', ', ?)
-                            END
+                            END 
                             WHERE username = ?");
-    $stmt->execute([$loginuser, $loginuser, $loginuser, $searchusern]);
+    $stmt->execute([$loginuser, $loginuser, $loginuser, $loginuser, $searchusern]);
 }
 
 echo $searchTerm;

@@ -85,8 +85,6 @@ function convertHashtagsToLinks($message) {
                 echo '<meta property="og:image" content="' . htmlspecialchars($foundProfile['pfp']) . '">';
                 echo '<meta property="og:url" content="http://librebook.co.uk/profiles/rprofiles.php?search=' . urlencode($foundProfile['username']) . '">';
                 echo '<meta property="og:type" content="profile">';
-                echo '<meta name="twitter:card" content="summary_large_image">';
-                echo '<meta name="twitter:site" content="@thatrandomspoon">';
 
                 echo '<section id="messages">';
                 echo '<h1>Search result</h1>';

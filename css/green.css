@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url("naturedrop.jpg");
+    background-color: #0c0a09;
     margin: 0;
     padding: 0;
     color: white;
@@ -10,7 +10,7 @@ body {
 }
 
 ::selection {
-    background-color: #1877f2; 
+    background-color: #11a876; 
     color: white; 
 }
 
@@ -22,16 +22,16 @@ img {
 }
 
 a {
-    color: #1877f2;
+    color: #11a876;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 a:active {
-    color: #1877f2;
+    color: #11a876;
 }
 
 #trinity {
-    background-color: #1877f2;
-    border: 1px solid #1877f2;
+    background-color: #11a876;
+    border: 1px solid #11a876;
     border-radius: 8px;
     color: white;
     padding: 10px;
@@ -43,14 +43,14 @@ a:active {
 
 #helloworld {
     max-width: 300px;
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: #1c1917;
     border-radius: 8px;
     padding: 30px;
 }
 
 
 #excempta{
-    background-color: #1877f2;
+    background-color: #11a876;
     color: white;
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -58,7 +58,7 @@ a:active {
 
 .creditbar {
     width: 100%;
-    background-color: #1877f2;
+    background-color: #11a876;
     text-align: center;
     position: fixed;
     bottom: 0;
@@ -70,7 +70,7 @@ a:active {
 #messages {
     margin: 30px auto;
     max-width: 600px;
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: #1c1917;
     border-radius: 8px;
     padding: 30px;
     color: white;
@@ -81,15 +81,14 @@ a:active {
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: #1c1917;
     border-radius: 8px;
     padding: 30px;
 }
 
 
 #head {
-    
-    background-color: rgba(24, 119, 242, 0.70);
+    background-color: #11a876;
     color: white;
     font-size: 24px;
     padding: 10px;
@@ -110,7 +109,7 @@ a:active {
     margin-left: auto;
     margin-right: auto;
     resize: none;
-    background-color: rgba(0, 0, 0, 0.70);
+    background-color: #1c1917;
 }
 
 #new_bio {
@@ -143,7 +142,7 @@ a:active {
 }
 .message .user {
     font-weight: bold;
-    color: #1877f2;
+    color: #11a876;
 }
 
 .message .timestamp {
@@ -169,7 +168,7 @@ a:active {
     font-size: 16px;
     border: 1px solid #272727;
     border-radius: 5px;
-    background-color: #212836;
+    background-color: #1c1917;
     color: white; 
 }
 
@@ -179,7 +178,7 @@ a:active {
 
 button {
     padding: 10px;
-    background-color: #1877f2; 
+    background-color: #11a876; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -188,7 +187,7 @@ button {
 }
 
 button:hover {
-    background-color: #115293; 
+    background-color: #0b7552; 
 }
 
 .fa-search {

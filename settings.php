@@ -68,6 +68,7 @@ include 'cmode.php';
             <option value="dark" <?php echo ($currentMode === 'dark') ? 'selected' : ''; ?>>Dark</option>
             <option value="blue" <?php echo ($currentMode === 'blue') ? 'selected' : ''; ?>>Blue</option>
             <option value="liberatube" <?php echo ($currentMode === 'liberatube') ? 'selected' : ''; ?>>Liberatube collab</option>
+            <option value="nature" <?php echo ($currentMode === 'nature') ? 'selected' : ''; ?>>Mint green - Inspired by Rocky Linux!</option>
             <option value="nothing" <?php echo ($currentMode === 'nothing') ? 'selected' : ''; ?>>De-bloated&trade;</option>
             <option value="opposite" <?php echo ($currentMode === 'opposite') ? 'selected' : ''; ?>>Opposite day - Become thankful for the colour scheme!</option>
         </select>
@@ -75,6 +76,10 @@ include 'cmode.php';
         <hr>
         <p></p>
         <a href="deleteyou.php" style="color: red;">Delete your account</a>
+        <p></p>
+        <hr>
+        <p></p>
+        <a href="apikey.php">API key hub</a>
         <p></p>
         <hr>
         <p></p>

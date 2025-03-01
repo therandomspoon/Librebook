@@ -4,17 +4,26 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 function containsEmoji($string) {
-    $string = preg_replace('/[^\w\s.,!?]/', '', $string);
-    return preg_match('/[^\x00-\x7F]/', $string);
+    return preg_match('/[\p{So}\p{Cn}]/u', $string);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
+    $username = trim($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $defaultMode = 'light';
+    $kidsv = isset($_POST['kidsm']) ? 'on' : 'off';
+
+    if (strpos($username, ' ') !== false || strpos($username, ',') !== false) {
+        session_start();
+        $_SESSION['error_message'] = 'Error: Usernames cannot contain spaces or commas.';
+        header('Location: erroreg.html');
+        exit();
+    }
 
     if (containsEmoji($username)) {
-        echo 'Error: Usernames cannot contain emojis.';
+        session_start();
+        $_SESSION['error_message'] = 'Error: Usernames cannot contain emojis.';
+        header('Location: erroreg.html');
         exit();
     }
 
@@ -23,17 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $count = $stmt->fetchColumn();
 
     if ($count == 0) {
-        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode, following) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$username, $password, $defaultMode, '']);
+        $stmt = $pdo->prepare('INSERT INTO users (username, password, preferred_mode, following, kids) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$username, $password, $defaultMode, '', $kidsv]);
 
         $stmtProfile = $pdo->prepare('INSERT INTO profiles (username, pfp, bio) VALUES (?, ?, ?)');
         $stmtProfile->execute([$username, '../images/empty.webp', '']);
 
-        echo 'Registration successful!';
         header('Location: ../login/login.html');
         exit();
     } else {
-        header('Location: ../errors/erroreg.html');
+        header('Location: erroreg.html');
         exit();
     }
 }

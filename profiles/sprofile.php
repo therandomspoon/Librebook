@@ -1,21 +1,22 @@
 <?php
 session_start();
-include '../config.php';
+include '../config.php'; // Include your PDO config
 
-if (!isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+    $foundProfile = null;
+
+    // Retrieve profile using PDO
+    $stmt = $pdo->prepare("SELECT username, pfp, bio FROM profiles WHERE username = ?");
+    $stmt->execute([$username]);
+    $foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$foundProfile) {
+        echo '<p>User profile not found</p>';
+    }
+} else {
     header('Location: ../login.html');
-    exit();
-}
-
-$userId = $_SESSION['user_id'];
-$username = $_SESSION['username'];
-
-$stmt = $pdo->prepare('SELECT username, pfp, bio FROM profiles WHERE username = ?');
-$stmt->execute([$username]);
-$foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$foundProfile) {
-    echo '<p>User profile not found</p>';
     exit();
 }
 
@@ -23,11 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newPfp = isset($_POST['new_pfp']) ? $_POST['new_pfp'] : $foundProfile['pfp'];
     $newBio = isset($_POST['new_bio']) ? htmlspecialchars($_POST['new_bio']) : $foundProfile['bio'];
 
-    $stmtUpdate = $pdo->prepare('UPDATE profiles SET pfp = ?, bio = ? WHERE username = ?');
-    $stmtUpdate->execute([$newPfp, $newBio, $username]);
+    // Update profile using PDO
+    $stmt = $pdo->prepare("UPDATE profiles SET pfp = ?, bio = ? WHERE username = ?");
+    $stmt->execute([$newPfp, $newBio, $username]);
 
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit();
+    if ($stmt->rowCount() > 0) {
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo '<p>Error updating profile</p>';
+    }
 }
 ?>
 
@@ -56,7 +62,7 @@ include '../cmode.php';
     <br>
     <div id="helloworld">
         <a href="../main.php">Take me back!</a>
-    </div>    
+    </div>
     <section id="sendamess">
         <section id="messages">
             <h1>My Profile</h1>
@@ -65,36 +71,15 @@ include '../cmode.php';
             <p>Bio: <?php echo $foundProfile['bio']; ?></p>
             <h2>Edit Profile</h2>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <label for="new_pfp">New Profile Picture:</label><br>
-                <?php echo "-- current pfp: " . $foundProfile['pfp']; ?>
-                <p></p>
-                <input style="width: 50%;" type="text" name="new_pfp" list="pfp_list" id="new_pfp" placeholder="Enter new profile picture URL" value="">
-                <datalist id="pfp_list">
-                    <option value="red default" data-path="../pfps/red.webp">red default</option>
-                    <option value="blue default" data-path="../pfps/blue.webp">blue defaultT</option>
-                    <option value="green default" data-path="../pfps/green.webp">green default</option>
-                    <option value="yellow default" data-path="../pfps/yellow.webp">yellow default</option>
-                    <option value="default" data-path="../pfps/empty.webp">default</option>
-                </datalist>
-            <br>
-            <label for="new_bio">New Bio:</label>
-            <br>
-            <textarea style="max-height: 20%;" name="new_bio" id="new_bio" placeholder="Enter new bio" rows="4" cols="50"><?php echo $foundProfile['bio']; ?></textarea>
-            <hr>
-            <button type="submit">Update Profile</button>
+                <label for="new_pfp">New Profile Picture URL:</label><br>
+                <input type="text" name="new_pfp" id="new_pfp" placeholder="Enter new profile picture URL" value="<?php echo $foundProfile['pfp']; ?>">
+                <br>
+                <label for="new_bio">New Bio:</label>
+                <br>
+                <textarea name="new_bio" id="new_bio" placeholder="Enter new bio" rows="4" cols="50"><?php echo $foundProfile['bio']; ?></textarea>
+                <br>
+                <button type="submit">Update Profile</button>
             </form>
-<script>
-    document.getElementById('new_pfp').addEventListener('input', function () {
-        var value = this.value;
-        var options = document.getElementById('pfp_list').options;
-        for (var i = 0; i < options.length; i++) {
-            if (options[i].value === value) {
-                this.value = options[i].getAttribute('data-path');
-                break;
-            }
-        }
-    });
-</script>
         </section>
         <br></br>
     </section>
