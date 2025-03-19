@@ -76,22 +76,25 @@ if ($_GET['function'] == 'send_message'){
     try {
         $query = "SELECT username
                   FROM users
-                  WHERE FIND_IN_SET(:sender, following)";
+                  WHERE FIND_IN_SET(:search, REPLACE(following, ' ', '')) > 0";
 
         $stmt = $pdo->prepare($query);
-        $stmt->bindValue(':sender', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':search', $username, PDO::PARAM_STR);
         $stmt->execute();
+
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         if ($result) {
+            $usernames = [];
             foreach ($result as $row) {
-                $name = htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8');
-                echo $name . ",";
+                $usernames[] = htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8');
             }
+            echo implode(",", $usernames);
         } else {
-            echo "You do not follow anyone.";
+            echo "No users found.";
         }
     } catch (PDOException $e) {
-        die("Error: " . $e->getMessage());
+        echo "Error: " . $e->getMessage();
     }
 } elseif ($_GET['function'] == 'dm_sendmessage') {
     $reciever = $_GET['recipient'];
