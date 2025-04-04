@@ -62,6 +62,6 @@ if (isset($_SESSION['user_id'])) {
     </section>
     <br><br>
     <div class="creditbar">
-        <a href="../masthead.html" id="excempta">Masthead</a>
+        <p>Librebook was created by therandomspoon</p>
     </div>
 </body>
