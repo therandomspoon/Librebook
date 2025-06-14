@@ -99,7 +99,7 @@ a:active {
     margin-left: 15px;
 }
 
-#message {
+#message, #reciever {
     padding: 12px;
     max-height: 50px;
     border: 1px solid #ccc;
