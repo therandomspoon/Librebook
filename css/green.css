@@ -42,6 +42,8 @@ a:active {
 }
 
 #helloworld {
+    top: 20px;
+    margin-left: auto;
     max-width: 300px;
     background-color: #1c1917;
     border-radius: 8px;
@@ -68,13 +70,18 @@ a:active {
 }
 
 #messages {
-    margin: 30px auto;
-    max-width: 600px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
     background-color: #1c1917;
+    border: 1px solid #272727;
     border-radius: 8px;
     padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: white;
 }
+
 #superbar {
     position: fixed;
     bottom: 0;
@@ -99,7 +106,7 @@ a:active {
     margin-left: 15px;
 }
 
-#message, #reciever {
+#message {
     color: white;
     padding: 12px;
     max-width: 1000px;
@@ -194,3 +201,22 @@ button:hover {
     font-size: 18px;
     color: white; 
 }
+
+#reacts{
+    color: white; 
+    margin-bottom: 8px;
+}
+
+#frlist {
+    margin-bottom: 30px;
+    margin-right: auto;
+    width: 400px;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #1c1917;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: white;
+}
+

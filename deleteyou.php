@@ -37,7 +37,7 @@ include 'cmode.php';
 </head>
 <body>
     <section id="head">
-        <img src="../images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <img src="../images/librebook1.png" style="max-width: 100%; height: auto; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
     <section id="sendamess">
@@ -46,7 +46,7 @@ include 'cmode.php';
             <h2>Delete Your Account</h2>
             <p>Are you sure you want to delete your account? It will be unrecoverable!</p>
             <form method="post" action="">
-                <input type="submit" value="Delete Account">
+                <input id="doom" type="submit" value="Delete Account">
             </form>
             <hr>
             <a href="main.php">No, take me back!</a>

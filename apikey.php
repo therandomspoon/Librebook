@@ -48,7 +48,7 @@ if (isset($_SESSION['message'])) {
 </head>
 <body>
     <section id="head">
-        <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <img src="/images/librebook1.png" style="max-width: 100%; height: auto; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
     <section id="messages">

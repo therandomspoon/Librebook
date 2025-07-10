@@ -30,6 +30,9 @@ function echoStylesheetTag($preferredMode) {
         case 'nature':
             $stylesheet = '/css/green.css';
             break;
+	case 'tecopa':
+	    $stylesheet = '/css/tecopa.css';
+	    break;
         default:
             $stylesheet = '/css/mainsite.css';
     }

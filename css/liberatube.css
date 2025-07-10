@@ -119,7 +119,7 @@ a:hover, a:focus {
     margin-left: 15px;
 }
 
-#message, #reciever {
+#message {
     padding: 12px;
     max-height: 50px;
     border: 1px solid #ccc;

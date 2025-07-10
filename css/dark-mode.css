@@ -102,7 +102,7 @@ a:active {
     margin-left: 15px;
 }
 
-#message, #reciever {
+#message {
     color: white;
     padding: 12px;
     max-width: 1000px;

@@ -50,7 +50,7 @@ include 'cmode.php';
 </style>
 <body>
     <section id="head">
-        <img src="/images/librebook1.png" style="height: 125px; width: 125px; float: right;">
+        <img src="/images/librebook1.png" style="max-width: 100%; height: auto; width: 125px; float: right;">
         <h1 id="headl">Librebook</h1>
     </section>
     <section id="messages">
@@ -71,6 +71,8 @@ include 'cmode.php';
             <option value="nature" <?php echo ($currentMode === 'nature') ? 'selected' : ''; ?>>Mint green - Inspired by Rocky Linux!</option>
             <option value="nothing" <?php echo ($currentMode === 'nothing') ? 'selected' : ''; ?>>De-bloated&trade;</option>
             <option value="opposite" <?php echo ($currentMode === 'opposite') ? 'selected' : ''; ?>>Opposite day - Become thankful for the colour scheme!</option>
+	    <option value="vista" <?php echo ($currentMode === 'vista') ? 'selected' : ''; ?>>Vista</option>
+	    <option value="tecopa" <?php echo ($currentMode === 'tecopa') ? 'selected' : ''; ?>>Tecopa</option>
         </select>
         <p></p>
         <hr>
