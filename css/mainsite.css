@@ -3,17 +3,19 @@ body {
     background-color: #f0f2f5;
     margin: 0;
     padding: 0;
+    color: black;
+}
+
+::selection {
+    background-color: #1877f2; 
+    color: white; 
 }
 
 video {
   max-width: 100%;
 }
 img {
-    max-width: 100%;
-}
-::selection {
-    background-color: #1877f2; 
-    color: white; 
+    max-width: 20%;
 }
 
 a {
@@ -24,11 +26,15 @@ a:active {
     color: #1877f2;
 }
 
+p {
+    color: black;
+}
+
 #trinity {
     background-color: #1877f2;
     border: 1px solid #1877f2;
     border-radius: 8px;
-    color: white;
+    color: black;
     padding: 10px;
     font-size: 15px;
     max-width: 250px;
@@ -43,11 +49,16 @@ a:active {
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    z-index: 1;
+    top: 20px;
+    margin-left: auto;
 }
+
 
 #excempta{
     background-color: #1877f2;
-    color: white;
+    color: black;
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -64,13 +75,29 @@ a:active {
 }
 
 #messages {
-    margin: 30px auto;
-    max-width: 600px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
     background-color: white;
     border: 1px solid #dddfe2;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+#frlist {
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    background-color: white;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
 }
 
 #superbar {
@@ -93,49 +120,54 @@ a:active {
     font-size: 24px;
     padding: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-bottom: 1px solid #dddfe2;
+    border-bottom: 1px solid #272727;
 }
 #headl{
     margin-left: 15px;
 }
 
-#message {
+#message, #reciever {
+    width: 100%;
+    color: black;
     padding: 12px;
+    max-width: 800px;
     max-height: 50px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
     resize: none;
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-
+    background-color: white;
+    border: 1px solid #dddfe2;
 }
 
 #new_bio {
     padding: 12px;
     max-width: 750px;
     max-height: 50px;
-    border: 1px solid #ccc;
+    background-color: white;
+    border: 1px solid #dddfe2;
     border-radius: 4px;
     box-sizing: border-box;
     margin: 6px auto 16px auto;
     resize: none;
     margin-left: 50px;
     margin-right: 50px;
+    color: black;
 }
 #new_pfp {
     padding: 12px;
     max-width: 750px;
     max-height: 50px;
-    border: 1px solid #ccc;
+    background-color: white;
+    border: 1px solid #dddfe2;
     border-radius: 4px;
     box-sizing: border-box;
     margin: 6px auto 16px auto;
     resize: none;
     margin-left: 50px;
     margin-right: 50px;
+    color: black;
 }
 .message .user {
     font-weight: bold;
@@ -143,7 +175,7 @@ a:active {
 }
 
 .message .timestamp {
-    color: #555;
+    color: black;
     font-size: 12px;
 }
 
@@ -153,7 +185,6 @@ a:active {
 
 #searchbar {
     text-align: center;
-    padding: 20px;
 }
 
 #searchform {
@@ -161,12 +192,13 @@ a:active {
 }
 
 #searchbut {
+    width: 50%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    background-color: white;
+    border: 1px solid #dddfe2;
     border-radius: 5px;
-    background-color: #f0f2f5;
-    color: #333; 
+    color: black;
 }
 
 #searchbut::placeholder {
@@ -178,7 +210,7 @@ button {
     background-color: #1877f2; 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 5px !important;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -187,7 +219,99 @@ button:hover {
     background-color: #115293; 
 }
 
+.cbutton { 
+    padding: 10px;
+    background-color: #1877f2; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cbutton:hover {
+    background-color: #115293; 
+}
+
+
 .fa-search {
     font-size: 18px;
-    color: white; 
+    color: black; 
+}
+
+.dropbtn {
+  background-color: #1877f2;
+  color: white;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+#mimicbutn {
+  background-color: #1877f2;
+  color: white !important;
+  padding: 0 12px;
+  font-size: 16px;
+  border-radius: 5px !important;
+  border: none;
+  height: 36px !important;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+
+#mimicbutn:hover {
+  background-color: #115293;
+  color: white;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #115293;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #1877f2;
+  overflow: hidden;
+  border-radius: 5px !important;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-40px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-content.show {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+
+.dropdown-content a {
+  display: inline-block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-content a:hover {
+  background-color: #115293;
 }
