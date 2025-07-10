@@ -71,7 +71,6 @@ include 'cmode.php';
             <option value="nature" <?php echo ($currentMode === 'nature') ? 'selected' : ''; ?>>Mint green - Inspired by Rocky Linux!</option>
             <option value="nothing" <?php echo ($currentMode === 'nothing') ? 'selected' : ''; ?>>De-bloated&trade;</option>
             <option value="opposite" <?php echo ($currentMode === 'opposite') ? 'selected' : ''; ?>>Opposite day - Become thankful for the colour scheme!</option>
-	    <option value="vista" <?php echo ($currentMode === 'vista') ? 'selected' : ''; ?>>Vista</option>
 	    <option value="tecopa" <?php echo ($currentMode === 'tecopa') ? 'selected' : ''; ?>>Tecopa</option>
         </select>
         <p></p>
