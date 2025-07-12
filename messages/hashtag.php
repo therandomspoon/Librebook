@@ -26,7 +26,7 @@ include '../cmode.php'
         <h1 id="headl">Librebook</h1>
     </section>
     <br>
-    <div id="helloworld">
+    <div id="helloworld" style="position: sticky; align-self: flex-start; float: left;">
         <?php
         echo 'Welcome back ' . htmlspecialchars($username) . '!';
         ?>
@@ -40,6 +40,22 @@ include '../cmode.php'
 </body>
 <?php
 include '../config.php';
+
+function extractID($string) {
+    $symbolPosition = strpos($string, '[#@');
+    if ($symbolPosition !== false) {
+        $substringAfterSymbol = substr($string, $symbolPosition);
+        $semicolonPosition = strpos($substringAfterSymbol, ';');
+        if ($semicolonPosition !== false) {
+            $numbers = substr($substringAfterSymbol, 3, $semicolonPosition - 3);
+            $numbers = preg_replace("/[^0-9]/", "", $numbers);
+            $replacement = "<a href='../messages/spmessages.php/?id=$numbers'>Reply to</a>";
+            $string = substr_replace($string, $replacement, $symbolPosition, $semicolonPosition + 1);
+        }
+    }
+            
+    return $string;
+}
 
 try {
     $hashtag = isset($_GET['tag']) ? $_GET['tag'] : '';
@@ -56,31 +72,17 @@ try {
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
+        echo "<section id='messages'>";
         foreach ($result as $row) {
             $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
             $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
             $timestamp = $row["timestamp"];
-            function extractID($string) {
-                $symbolPosition = strpos($string, '[#@');
-                if ($symbolPosition !== false) {
-                    $substringAfterSymbol = substr($string, $symbolPosition);
-                    $semicolonPosition = strpos($substringAfterSymbol, ';');
-                    if ($semicolonPosition !== false) {
-                        $numbers = substr($substringAfterSymbol, 3, $semicolonPosition - 3);
-                        $numbers = preg_replace("/[^0-9]/", "", $numbers);
-                        $replacement = "<a href='../messages/spmessages.php/?id=$numbers'>Reply to</a>";
-                        $string = substr_replace($string, $replacement, $symbolPosition, $semicolonPosition + 1);
-                    }
-                }
-            
-                return $string;
-            }
             $message = extractID($message);
-            echo "<section id='messages'>";
+            
             echo "<div><b>" . $name . ":</b> " . $message . " (Sent on: " . $timestamp . ")</div>";
             echo "<hr>";
-            echo "</section>";
         }
+        echo "</section>";
     } else {
         echo "No messages with this hashtag.";
     }
