@@ -60,7 +60,6 @@ function extractID($string) {
 try {
     $hashtag = isset($_GET['tag']) ? $_GET['tag'] : '';
 
-    echo "<h1 style='text-align: center;'>Librebook hashtag: #$hashtag</h1>";
 
     $query = "SELECT `name`, `message`, `timestamp`
               FROM messages
@@ -73,6 +72,7 @@ try {
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
         echo "<section id='messages'>";
+        echo "<h1 style='text-align: center;'>Librebook hashtag: #$hashtag</h1>";
         foreach ($result as $row) {
             $name = htmlspecialchars($row["name"], ENT_QUOTES, 'UTF-8');
             $message = htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8');
