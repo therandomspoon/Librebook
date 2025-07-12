@@ -38,13 +38,13 @@ function convertNameToLink($name) {
 }
 
 try {
-    $messagenum = ($pagenum - 1) * 10;
+    $messagenum = ($pagenum - 1) * $offsetnum;
     $messageId = isset($_GET['id']) ? intval($_GET['id']) : null;
     if ($messageId) {
         $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp` FROM messages WHERE id = :id");
         $stmt->bindParam(':id', $messageId, PDO::PARAM_INT);
     } else {
-        $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp` FROM messages ORDER BY `timestamp` ASC LIMIT 10 OFFSET :offset");
+        $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp` FROM messages ORDER BY `timestamp` DESC LIMIT 10 OFFSET :offset");
         $stmt->bindParam(':offset', $messagenum, PDO::PARAM_INT);
     }
     $stmt->execute();
