@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 10, 2025 at 03:41 PM
--- Server version: 10.11.11-MariaDB
--- PHP Version: 8.2.28
+-- Host: sql207.infinityfree.com
+-- Generation Time: Sep 10, 2025 at 05:28 PM
+-- Server version: 11.4.7-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,8 +19,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `librebook`
+-- Database: `if0_36414508_librebooktecopa`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blocked`
+--
+
+CREATE TABLE `blocked` (
+  `blockedID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `date` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -32,7 +45,7 @@ CREATE TABLE `dm` (
   `reciever` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -44,8 +57,9 @@ CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `message` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `nsfw` bit(1) NOT NULL DEFAULT b'0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -57,8 +71,8 @@ CREATE TABLE `profiles` (
   `username` varchar(255) DEFAULT NULL,
   `pfp` varchar(255) DEFAULT NULL,
   `bio` varchar(255) DEFAULT NULL,
-  `PROCOLOUR` varchar(255) DEFAULT '#1877f2',
-  `bimg` varchar(255) DEFAULT 'none'
+  `PROCOLOUR` varchar(255) DEFAULT '#131b27',
+  `bimg` varchar(255) DEFAULT '../images/default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,8 +101,10 @@ CREATE TABLE `users` (
   `preferred_mode` varchar(10) DEFAULT 'light',
   `following` varchar(255) DEFAULT '',
   `kids` varchar(10) NOT NULL DEFAULT 'off',
-  `apikey` varchar(64) DEFAULT 'NOT CREATED'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `apikey` varchar(64) DEFAULT 'NOT CREATED',
+  `verified` bit(1) DEFAULT b'0',
+  `saved` varchar(255) DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Indexes for dumped tables

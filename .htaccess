@@ -8,3 +8,6 @@
     Deny from all
 </Directory>
 php_value date.timezone UTC
+
+RewriteEngine On
+RewriteRule ^messages/view-([0-9]+)\.php$ /messages/spmessages.php?id=$1 [L]

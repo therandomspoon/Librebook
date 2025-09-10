@@ -48,9 +48,10 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) {
         <a href="../settings.php" style="float: right;">Go to Settings</a>
         <p></p>
         <a href="../logout.php">Logout</a>
-        <a href="../profiles/sprofile.php" style="float: right;">See my profile</a>
+        <a href="../profiles/sprofile.php" style="float: right;">Edit my profile</a>
         <p></p>
-        <a href="/messages/followmes.php">See what the people you follow are saying!</a>
+        <a href="/messages/followmes.php">Friends only</a>
+        <a href="../messages/savedposts.php" style="float: right;">Saved posts</a>
         <p></p>
         <a href="/messages/dm.php">Your Direct Messages</a>
         <p></p>
@@ -80,6 +81,8 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) {
             <form id="messageForm">
                 <textarea id="message" name="message" rows="4" cols="50" required placeholder="let the world know what you're thinking"></textarea>
                 <p></p>
+                <input type="checkbox" id="nsfw" name="nsfw" value="nsfw"><label>My message contains NSFW</label>
+                <p></p>
                 <button id="bootun" type="submit">Post</button>
                 <hr>
                 <button type="button" onclick="updateMessages()" style="margin-right: 10px;">Refresh messages!</button><button onclick='location="../messages/clearrep.php"'>Clear reply</button>
@@ -93,7 +96,6 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) {
             <div id="messageList"></div>
         </section>
     </div>
-
     <section id="frlist">
         <h1>Your friends</h1>
         <?php
@@ -161,10 +163,11 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) {
             event.preventDefault();
             var name = userID;
             var message_text = $("#message").val();
+            var nsfw = $("#nsfw").is(":checked") ? 1 : 0;
             $.ajax({
                 type: "POST",
                 url: "../messages/ksubmit.php",
-                data: { name: name, message_text: message_text },
+                data: { name: name, message_text: message_text, nsfw: nsfw },
                 success: function (response) {
                     $("#message").val("");
                     $("#success").text(response).fadeIn().delay(3000).fadeOut();

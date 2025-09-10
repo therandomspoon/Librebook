@@ -5,8 +5,9 @@ ini_set('display_errors', 1);
 
 include '../cmode.php';
 include '../config.php';
+$username = $_SESSION['username'];
 $_SESSION['mostrecent'] = isset($_GET['id']) ? $_GET['id'] : '';
-
+$userId = $_SESSION['user_id'] ?? null;
 $sui = isset($_SESSION['sui']) ? $_SESSION['sui'] : null;
 $oname = isset($_SESSION['oname']) ? $_SESSION['oname'] : null;
 $omessage = isset($_SESSION['omessage']) ? $_SESSION['omessage'] : null;
@@ -85,32 +86,15 @@ function convertHashtagsToLinks($message) {
         <h1 id="headl">Librebook</h1>
     </section>
     <br>
-    <div id="helloworld" style="position: sticky; align-self: flex-start; float: left;">
-        <h1>Return to the main page</h1>
+    <div id="helloworld" style="float: left;">
         <button onclick='location="../main.php"'>Take me back!</button>
-    </div>
-    <section id="frlist" style="float: right;">
-        <h1>Your friends</h1>
         <?php
         $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
         $stmt = $pdo->prepare("SELECT username, bio, pfp, PROCOLOUR, bimg FROM profiles WHERE username LIKE :searchTerm LIMIT 1");
         $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
         $foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt = $pdo->prepare("SELECT following FROM users WHERE username = ?");
-        $stmt->execute([$foundProfile['username']]);
-        $followers = $stmt->fetchColumn();
-
-        if ($followers !== null) {
-            $followersList = explode(',', $followers);
-            echo "Followers for " . htmlspecialchars($foundProfile['username']) . ": <br>";
-            foreach ($followersList as $follower) {
-                echo htmlspecialchars($follower) . '<br>';
-            }
-        } else {
-            echo "User " . htmlspecialchars($foundProfile['username']) . " has no followers.";
-        }
         ?>
-    </section>
+    </div>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -126,6 +110,22 @@ function convertHashtagsToLinks($message) {
             $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
             $foundProfile = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            $rawName = $foundProfile['username'];
+            $vname = htmlspecialchars($rawName, ENT_QUOTES, 'UTF-8');
+
+            $vStmt = $pdo->prepare("SELECT verified FROM users WHERE username = ?");
+            $vStmt->execute([$rawName]);
+            $vRow = $vStmt->fetch(PDO::FETCH_ASSOC);
+
+            $isverif = $vRow["verified"] ?? 0;
+
+            $fullname = htmlspecialchars($rawName, ENT_QUOTES, 'UTF-8');
+            
+            if ($isverif) {
+                $fullname .= ' <img src="/images/verified2.svg" alt="Verified" style="vertical-align: middle; max-width: 18px; max-height: 18px;">';
+            }
+
+
             if ($foundProfile) {
                 echo '<meta property="og:title" content="' . htmlspecialchars($foundProfile['username']) . '">';
                 echo '<meta property="og:description" content="' . htmlspecialchars($foundProfile['bio']) . '">';
@@ -134,13 +134,54 @@ function convertHashtagsToLinks($message) {
                 echo '<style> body { background-image: none !important; background-color: ' . htmlspecialchars($foundProfile['PROCOLOUR']) . ' !important; }</style>';
                 echo '<meta property="og:type" content="profile">';
                 echo '<section id="messages" style="flex-grow: 1;">';
-                echo '<h1>Search result</h1>';
                 echo '<div class="profile-header">';
                 echo '<img id="banner" src="'. htmlspecialchars($foundProfile['bimg']) . '" alt="Banner">';
                 echo '<img src="' . htmlspecialchars($foundProfile['pfp']) . '" alt="Profile Picture" id="blading">';
                 echo '</div>';
-                echo '<h1>Username: ' . htmlspecialchars($foundProfile['username']) . '</h1>';
+                echo '<h1>Username: ' . $fullname . '</h1>';
                 echo '<p>Bio: ' . htmlspecialchars($foundProfile['bio']) . '</p>';
+                try {
+                    $stmt = $pdo->prepare("SELECT following FROM users WHERE username = ?");
+                    $stmt->execute([$foundProfile['username']]);
+                    $followers = $stmt->fetchColumn();
+                    $followerCount = $followers ? count(explode(',', $followers)) : 0;
+    
+                    echo "<p>" . htmlspecialchars($rawName, ENT_QUOTES, 'UTF-8') . " has <span style='color:#1877f2; font-weight: bold;'>" . $followerCount . "</span> follower(s).</p>";
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+
+                $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+                $stmt->execute([$rawName]);
+                $resultofsearch = $stmt->fetch(PDO::FETCH_ASSOC);
+                $blockID = $resultofsearch['id'] ?? null;
+                $stmt = $pdo->prepare('SELECT COUNT(*) FROM blocked WHERE blockedID = ? AND userID = ?');
+                $stmt->execute([$blockID, $userId]);
+                $count = $stmt->fetchColumn();
+                if ($count == 1) {
+                    echo "<p style='color:red;'>You have blocked this user.</p>";
+                } else {
+                }
+                echo '<form method="post" action="block.php">';
+                echo '<input type="submit" value="Block/Unblock" />';
+                echo '</form>';
+                $stmt = $pdo->prepare("SELECT following FROM users WHERE username = ?");
+                $stmt->execute([$username]);
+                $following = $stmt->fetchColumn();
+
+                if ($following !== null) {
+                    $followingList = explode(',', $following);
+                    $followingList = array_map('trim', $followingList);
+    
+                    if (in_array($foundProfile['username'], $followingList)) {
+                        echo "<p>You follow this user!</p>";
+                    } else {
+                        echo "<p>You do not follow this user!</p>";
+                    }
+                } else {
+                    echo "<p>You do not follow this user!</p>";
+                }
+
                 echo '<form method="post" action="follow.php">';
                 echo '<input type="submit" value="Follow/Unfollow" />';
                 echo '</form>';
@@ -150,7 +191,7 @@ function convertHashtagsToLinks($message) {
                 try {
                     $messageId = isset($_GET['id']) ? intval($_GET['id']) : null;
 
-                    $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp` FROM messages WHERE name = :name ORDER BY `timestamp` DESC");
+                    $stmt = $pdo->prepare("SELECT `id`, `name`, `message`, `timestamp`, `nsfw` FROM messages WHERE name = :name ORDER BY `timestamp` DESC");
                     $stmt->bindParam(':name', $foundProfile['username'], PDO::PARAM_STR);
                     $stmt->execute();
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -172,15 +213,32 @@ function convertHashtagsToLinks($message) {
                             $message = extractID($message);
                             $message = convertHashtagsToLinks($message);
                             $kmode = $_SESSION['kmode'] ?? 'off';
-                            if ($kmode == 'on') {
-                                $forbiddenWords = json_decode(file_get_contents('bad-words.json'), true);
-                                $lowercase_message_text = strtolower($message);
-                                foreach ($forbiddenWords as $word) {
-                                    if (strpos($lowercase_message_text, strtolower($word)) !== false) {
-                                        $message = str_ireplace($word, '[CENSORED BY KIDS MODE] ', $message);
+                            $isNSFW = $row["nsfw"] ?? 0;
+
+                            if ($kmode === 'on') {
+                                if ($isNSFW) {
+                                    $message = '[CENSORED BY KIDS MODE: NSFW]';
+                                } else {
+                                    $forbiddenWords = json_decode(file_get_contents('bad-words.json'), true);
+                                    foreach ($forbiddenWords as $word) {
+                                        $message = preg_replace("/\b" . preg_quote($word, '/') . "\b/i", '[CENSORED BY KIDS MODE]', $message);
                                     }
                                 }
                             }
+
+                            $vStmt = $pdo->prepare("SELECT verified FROM users WHERE username = ?");
+                            $vStmt->execute([$name]);
+                            $vRow = $vStmt->fetch(PDO::FETCH_ASSOC);
+                            $userIsVerified = $vRow["verified"] ?? 0;
+
+                            $verifiedBadge = '';
+                            if ($userIsVerified) {
+                                $verifiedBadge = ' <img src="/images/verified2.svg" alt="Verified" style="vertical-align: middle; max-width: 18px; max-height: 18px;">';
+                            }
+
+                            $nameLink = '<a href="../profiles/rprofiles.php?search=' . urlencode($name) . '">' . $name . '</a>' . $verifiedBadge;
+
+
                             $realdate = date("l M j, Y h:i:s A", strtotime($timestamp));
                             echo "<div style='border-radius: 8px; margin-bottom: 12px; color: #ccc; font-family: sans-serif;'>";
                             if (filter_var($message, FILTER_VALIDATE_URL) && 
@@ -203,6 +261,9 @@ function convertHashtagsToLinks($message) {
                             }
                             else {
                                 echo "  <p style='font-size: 18px; margin: 0 0 8px;'><b style='color: #4aa3ff;'>{$nameLink}:</b> {$message}</p>";
+                            }
+                            if ($isNSFW) {
+                                echo "<p style='color:red;'>NSFW</p>";
                             }
                             echo "  <p style='font-size: 0.9em; color: #888; margin: 0 0 10px;'>Sent on: {$realdate}</p>";
                             echo "<div style='color: #ccc; margin-bottom: 8px;'>";

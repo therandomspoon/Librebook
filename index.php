@@ -18,6 +18,9 @@ if (isset($_SESSION['user_id'])) {
         width: 600px;
         height: 500px;
     }
+    #entrybut{
+        font-size: 18px;
+    }
 </style>
 <head>
     <meta charset="UTF-8">
@@ -44,9 +47,7 @@ if (isset($_SESSION['user_id'])) {
             <h1>Welcome to Librebook !</h1>
             <hr>
             <p>For security and functionality reasons you must login or register to use our site (sorry) but do not fret we dont collect data apart from your username and password so you can login and message!</p>
-            <a href="../registration/register.html">register</a>
-            <p></p>
-            <a href="../login/login.html">login</a>
+            <a href="../registration/register.html"><button id="entrybut" style="margin-right: 10px;">register</button></a><a href="../login/login.html"><button id="entrybut">login</button></a>
         </section>
     </section>
     <section id="sendamess">

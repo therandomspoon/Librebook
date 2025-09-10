@@ -49,7 +49,7 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
         <h1 id="headl">Librebook</h1>
     </section>
     <br>
-    <div id="helloworld">
+    <div id="helloworld" style="position: sticky; align-self: flex-start;">
         <?php
         echo 'Welcome back ' . htmlspecialchars($username) . '!';
         ?>
@@ -60,7 +60,33 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
         <p></p>
         <a href="followmes.php">See what the people you follow are saying!</a>
     </div>
-    <br>
+    <section id="frlist">
+        <h1>Your friends</h1>
+        <?php
+
+        try {
+            $query = "SELECT username
+                      FROM users
+                      WHERE FIND_IN_SET(:search, REPLACE(following, ' ', '')) > 0";
+
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':search', $username, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                foreach ($result as $row) {
+                    echo '<a style="font-size: 20px;" href="../profiles/rprofiles.php?search=' . htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row["username"], ENT_QUOTES, 'UTF-8') . '</a><br>';
+                }
+            } else {
+                echo "No users found.";
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        ?>
+    </section>
     <section id="messages">
         <h1>Let someone know what you're thinking</h1>
         <?php if (isset($_SESSION['replyto'])) { echo $_SESSION['replyto']; } ?>
@@ -83,7 +109,6 @@ if ($_SESSION['sudopassword'] != $_SESSION['currentpass']) { //* comparing the c
         <h1>Your sent messages:</h1>
         <div id="smessageList"></div>
     </section>
-
     <script>
         var userID = <?php echo json_encode($username); ?>;
         function updateMessages() {

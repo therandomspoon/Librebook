@@ -10,6 +10,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = htmlspecialchars($_POST["name"], ENT_QUOTES, 'UTF-8');
         $message_text = $_POST["message_text"];
+        $nsfw = isset($_POST['nsfw']) && $_POST['nsfw'] == 1 ? 1 : 0;
 
         if (empty($name) || empty($message_text)) {
             echo "Sender name and message are required!";
@@ -34,10 +35,11 @@ try {
                 $message_text = $_SESSION['replyto'] . $message_text;
             }
 
-            $sql = "INSERT INTO messages (`name`, `message`, `timestamp`) VALUES (?, ?, CURRENT_TIMESTAMP)";
+            $sql = "INSERT INTO messages (`name`, `message`, `timestamp`, `nsfw`) VALUES (?, ?, CURRENT_TIMESTAMP, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $message_text, PDO::PARAM_STR);
+            $stmt->bindValue(3, $nsfw, PDO::PARAM_INT);
             $stmt->execute();
             echo "Message sent successfully!";
             unset($_SESSION['replyto']);
@@ -46,4 +48,5 @@ try {
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }
+unset($_SESSION['replyto']);
 ?>

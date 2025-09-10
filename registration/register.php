@@ -35,11 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailCount = $stmt->fetchColumn();
 
     if ($usernameCount == 0 && $emailCount == 0) {
-        // Redirect to email authentication
         header('Location: emailauth.php');
         exit();
     } else {
-        // Error redirect if username or email already exists
         if ($usernameCount > 0) {
             echo 'Error: Username already exists.';
         } elseif ($emailCount > 0) {

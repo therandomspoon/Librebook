@@ -45,7 +45,34 @@ include 'cmode.php';
     font-weight: bold;
     border: 2px #32CD32;
     border-radius: 8px;
+    text-decoration: none;
     padding: 10px;
+}
+#dc:hover {
+    background-color: #2db92d;
+    color: white;
+    font-weight: bold;
+    border: 2px #2db92d;
+    border-radius: 8px;
+    padding: 10px;
+}
+#dd {
+    background-color: #DF1616;
+    color: white;
+    font-weight: bold;
+    border: 2px #DF1616;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 10px; 
+}
+#dd:hover {
+    background-color: #B21111;
+    color: white;
+    font-weight: bold;
+    border: 2px #B21111;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 10px; 
 }
 </style>
 <body>
@@ -58,7 +85,7 @@ include 'cmode.php';
     <hr>
     <br>
     <a id="dc" href="data-center.php">User Data Center</a>
-    <p>Manage your data on librebook</p>
+    <p>Manage your data and messages on librebook</p>
     <hr>
     <form method="post" action="settings.php">
         <p></p>
@@ -76,19 +103,19 @@ include 'cmode.php';
         <p></p>
         <hr>
         <p></p>
-        <a href="deleteyou.php" style="color: red;">Delete your account</a>
+        <a href="deleteyou.php" id="dd">Delete your account</a>
         <p></p>
         <hr>
         <p></p>
-        <a href="apikey.php">API key hub</a>
+        <a href="apikey.php"><button>API key hub</button></a>
         <p></p>
         <hr>
         <p></p>
-        <a href="../logout.php">Logout</a>
+        <a href="../logout.php"><button>Logout</button></a>
         <p></p>
         <hr>
         <p></p>
-        <a href="../profiles/sprofile.php">Edit my profile</a>
+        <a href="../profiles/sprofile.php"><button>Edit my profile</button></a>
         <p></p>
         <hr>
         <p></p>
